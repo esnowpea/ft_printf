@@ -16,12 +16,6 @@
 # include <zconf.h>
 # include <libft.h>
 
-typedef struct		s_type
-{
-	char 			type;
-	void			(*func)(int len);
-}					t_type;
-
 typedef struct		s_format_sp
 {
 	unsigned short 	flags;
@@ -30,6 +24,12 @@ typedef struct		s_format_sp
 	unsigned short 	size;
 	char			type;
 }					t_format_sp;
+
+typedef struct		s_type
+{
+	char 			type;
+	void			(*func)(t_format_sp spec, va_list ap);
+}					t_type;
 
 /*
 **	'-'	- 00001

@@ -6,12 +6,12 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:45 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/13 17:10:50 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:26:07 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
+
 t_type g_type[] = {
 		{'c', &ft_c}
 		{'s', &ft_s}
@@ -24,36 +24,28 @@ t_type g_type[] = {
 		{'f', &ft_f}
 		{'e', &ft_e}
 		{'g', &ft_g}
-};*/
+};
 
-unsigned int x2(unsigned int k)
+void 	find_function(t_format_sp spec, va_list ap)
 {
-	unsigned int out;
-	unsigned int l;
+	int	i;
 
-	out = 0;
-	l = 1 << 31;
-	while (!(k & l) && l)
+	i = 0;
+	while (i < 11)
 	{
-		l = l >> 1;
+		 if (g_type[i].type == spec.type)
+		 {
+			  g_type[i].func(spec, ap);
+			  return ;
+		 }
+		 i++;
 	}
-	//if (l == 0)
-	//write(1, "0", 1);
-	while (l)
-	{
-		if (k & l)
-			out = out * 10 + 1;//write(1, "1", 1);
-		else
-			out = out * 10 + 0;//write(1, "0", 1);
-		l = l >> 1;
-	}
-	return (out);
 }
 
 int		ft_printf(const char *format, ...)
 {
-	va_list ap;
-	t_format_sp spec;
+	va_list		ap;
+	t_format_sp	spec;
 
 	va_start(ap, format);
 	while (*format)
@@ -61,7 +53,7 @@ int		ft_printf(const char *format, ...)
 		if (*format == '%' && *(++format) != '%')
 		{
 			spec = parsing(&format, ap);
-
+			find_function(spec, ap);
 		}
 		else
 			ft_putchar(*format);
