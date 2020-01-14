@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/14 12:41:39 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/14 13:04:18 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ typedef struct		s_type
 
 int			ft_printf(const char *format, ...);
 t_format_sp	parsing(const char **format, va_list ap);
-int			ft_c(t_format_sp spec, va_list ap);
 char 		*ft_strfill(char c, int length);
+int			ft_c(t_format_sp spec, va_list ap);
+int			ft_s(t_format_sp spec, va_list ap);
 
 #endif //FT_PRINTF_FT_PRINTF_H
 

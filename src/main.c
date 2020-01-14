@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 18:00:04 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/14 12:56:14 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:26:04 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -40,6 +40,8 @@ unsigned int x22(unsigned int k)
 
 int main()
 {
-	ft_printf("Hello World! %% %10c\n", 'A');
-	printf("Hello World! %% %10c\n", 'A');
+	char str[] = "Hello World! %% %-10.6s\n";
+	char arg[] = "asd123tyu0";
+	ft_printf(str, arg);
+	printf(str, arg);
 }
