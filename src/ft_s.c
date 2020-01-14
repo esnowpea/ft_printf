@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:05:34 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/14 15:13:57 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:59:00 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		ft_s(t_format_sp spec, va_list ap)
 {
 	char	*s;
 	char 	*str;
-	int 	count;
 	int		len_s;
 	int		len;
 
@@ -61,8 +60,7 @@ int		ft_s(t_format_sp spec, va_list ap)
 		str = add_s_left(str, s, len_s);
 	else
 		str = add_s_right(str, s, len_s);
-	count = ft_strlen(str);
-	write(1, str, count);
+	write(1, str, len);
 	free(str);
-	return (count);
+	return (len);
 }
