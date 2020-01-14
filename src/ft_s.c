@@ -6,17 +6,18 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:05:34 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/14 15:59:00 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/14 16:09:47 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 #define max(a, b) a > b ? a : b
 #define min(a, b) a < b ? a : b
 
 char 	*add_s_left(char *str, const char *s, int len_s)
 {
-	size_t 	i;
+	int 	i;
 
 	i = 0;
 	while (i < len_s)
@@ -29,9 +30,9 @@ char 	*add_s_left(char *str, const char *s, int len_s)
 
 char 	*add_s_right(char *str, const char *s, int len_s)
 {
-	size_t	i;
-	size_t	len;
-	size_t	start;
+	int		i;
+	int		len;
+	int		start;
 
 	len = ft_strlen(str);
 	start = len - len_s;
