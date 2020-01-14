@@ -14,8 +14,6 @@
 
 t_format_sp parsing3(const char **format, t_format_sp spec)
 {
-	 while ((**(format) <= '9' && **(format) >= '0') || **(format) == '*')
-		  (*format)++;
 	 if (**(format) == 'l' && *(*(format) + 1) != 'l')
 		  spec.size |= 1 << 0;
 	 else if (**(format) == 'l' && *(*(format) + 1) == 'l')
@@ -34,6 +32,8 @@ t_format_sp parsing3(const char **format, t_format_sp spec)
 	 return (spec);
 }
 
+/*  define width and accuracy */
+
 t_format_sp parsing2(const char **format, va_list ap, t_format_sp spec)
 {
 	 if (**(format) <= '9' && **(format) >= '0')
@@ -50,8 +50,12 @@ t_format_sp parsing2(const char **format, va_list ap, t_format_sp spec)
 		  else if (**(format) == '*')
 			   spec.accur = va_arg(ap, int);
 	 }
-	 return (parsing3(format, spec));
+	while ((**(format) <= '9' && **(format) >= '0') || **(format) == '*')
+		(*format)++;
+	return (parsing3(format, spec));
 }
+
+/*  define flags   */
 
 t_format_sp parsing(const char **format, va_list ap)
 {
