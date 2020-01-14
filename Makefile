@@ -25,6 +25,9 @@ LDLIBS = -lft
 SRC_NAME =  main.c \
             ft_printf.c \
             parsing.c \
+            ft_c.c \
+            ft_s.c \
+            ft_d.c
 
 OBJ = ./obj/
 

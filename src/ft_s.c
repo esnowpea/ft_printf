@@ -34,7 +34,7 @@ char 	*add_s_right(char *str, const char *s, int len_s)
 	int		len;
 	int		start;
 
-	len = ft_strlen(str);
+	len = (int)ft_strlen(str);
 	start = len - len_s;
 	i = start;
 	while (i < len)
@@ -53,7 +53,7 @@ int		ft_s(t_format_sp spec, va_list ap)
 	int		len;
 
 	s = va_arg(ap, char*);
-	len_s = min(spec.accur, ft_strlen(s));
+	len_s = min(spec.accur, (int)ft_strlen(s));
 	len = max(spec.width, len_s);
 	if (!(str = ft_strfill(' ', len)))
 		return (-1);

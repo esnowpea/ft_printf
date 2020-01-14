@@ -3,7 +3,7 @@ project(ft_printf C)
 
 set(CMAKE_C_STANDARD 90)
 
-add_executable(ft_printf src/main.c src/ft_printf.c src/parsing.c src/ft_c.c src/ft_s.c)
+add_executable(ft_printf src/main.c src/ft_printf.c src/parsing.c src/ft_c.c src/ft_s.c src/ft_d.c)
 target_include_directories(ft_printf PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
 

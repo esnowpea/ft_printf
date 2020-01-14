@@ -31,7 +31,7 @@ void 	find_function(t_format_sp spec, va_list ap)
 	int		i;
 
 	i = 0;
-	while (i < sizeof(g_type) / sizeof(t_type))
+	while (i < (int)(sizeof(g_type) / sizeof(t_type)))
 	{
 		 if (g_type[i].type == spec.type)
 		 {
