@@ -28,6 +28,11 @@ t_format_sp parsing3(const char **format, t_format_sp spec)
 		(*format)++;
 	if (**(format) == 'l' || **(format) == 'h')
 		(*format)++;
+	while (**(format) != 'c' && **(format) != 's' && **(format) != 'p' && \
+	**(format) != 'd' && **(format) != 'o' && **(format) != 'u' && \
+	**(format) != 'x' && **(format) != 'X' && **(format) != 'f' && \
+	**(format)!= 'e' &&	**(format) != 'g')
+		(*format)++;
 	spec.type = **(format);
 	return (spec);
 }
