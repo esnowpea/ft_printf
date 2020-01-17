@@ -6,61 +6,25 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:05:34 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/14 16:09:47 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/17 16:36:13 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char 	*add_s_left(char *str, const char *s, int len_s)
-{
-	int 	i;
-
-	i = 0;
-	while (i < len_s)
-	{
-		str[i] = s[i];
-		i++;
-	}
-	return (str);
-}
-
-char 	*add_s_right(char *str, const char *s, int len_s)
-{
-	int		i;
-	int		len;
-	int		start;
-
-	len = (int)ft_strlen(str);
-	start = len - len_s;
-	i = start;
-	while (i < len)
-	{
-		str[i] = s[i - start];
-		i++;
-	}
-	return (str);
-}
-
 int		ft_s(t_format_sp spec, va_list ap)
 {
 	char	*s;
 	char 	*str;
-	int		len_s;
 	int		len;
 
-	s = va_arg(ap, char*);
-	len_s = (int)ft_strlen(s);
-	if (spec.accur != -1)
-		len_s = min(spec.accur, (int)ft_strlen(s));
-	len = max(spec.width, len_s);
-	if (!(str = ft_strfill(' ', len)))
-		return (-1);
-	if ((spec.flags & 1) == 1)
-		str = add_s_left(str, s, len_s);
-	else
-		str = add_s_right(str, s, len_s);
-	write(1, str, len);
-	free(str);
+	str = va_arg(ap, char*);
+	len = min((int)ft_strlen(str), spec.accur);
+	s = ft_strnew(len);
+	ft_memcpy(s, str, len);
+	s = handler_flags(s, spec);
+	len = (int)ft_strlen(s);
+	write(1, s, len);
+	free(s);
 	return (len);
 }

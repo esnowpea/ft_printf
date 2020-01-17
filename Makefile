@@ -6,11 +6,11 @@
 #    By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 13:56:52 by esnowpea          #+#    #+#              #
-#    Updated: 2020/01/14 10:42:01 by esnowpea         ###   ########.fr        #
+#    Updated: 2020/01/17 15:05:44 by esnowpea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+NAME = libftprintf.a
 
 CC = gcc
 
@@ -22,12 +22,13 @@ LDHEAD = ./libft/inc/
 
 LDLIBS = -lft
 
-SRC_NAME =  main.c \
-            ft_printf.c \
+SRC_NAME =  ft_printf.c \
             parsing.c \
             ft_c.c \
             ft_s.c \
-            ft_d.c
+            ft_d.c \
+            ft_itoa_long.c \
+            handler_flags.c
 
 OBJ = ./obj/
 
@@ -42,7 +43,9 @@ HEAD = ./inc/
 all: create_obj $(NAME)
 
 $(NAME): $(addprefix $(OBJ), $(OBJ_NAME))
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $^ -o $@
+	@make -C ./libft
+	@ar rc $@ $^
+	@ranlib $(NAME)
 	@echo "\033[0;32m$(NAME)'s program created.\033[0m"
 
 $(OBJ)%.o: $(SRC)%.c
@@ -54,10 +57,12 @@ create_obj:
 clean:
 	@rm -rf $(addprefix $(OBJ), $(OBJ_NAME))
 	@rm -rf $(OBJ)
+	@make -C ./libft clean
 	@echo "\033[0;32m$(NAME)'s .o files deleted.\033[0m"
 
 fclean: clean
 	@rm -rf $(NAME)
+	@make -C ./libft fclean
 	@echo "\033[0;32m$(NAME) Project fully cleaned.\033[0m"
 
 re: fclean all

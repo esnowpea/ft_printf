@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:45 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/16 16:44:06 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/17 12:04:20 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 t_type g_type[] = {
 		{'c', &ft_c},
+		{'%', &ft_c},
 		{'s', &ft_s},
-		{'d', &ft_d}/*,
+		{'d', &ft_d},
+		{'i', &ft_d}/*,
 		{'p', &ft_p},
 		{'o', &ft_o},
 		{'u', &ft_u},
@@ -64,8 +66,9 @@ int		ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (*format)
 	{
-		if (*format == '%' && *(++format) != '%')
+		if (*format == '%')
 		{
+			format++;
 			find_function(parsing(&format, ap), ap);
 		}
 		else

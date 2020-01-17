@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/16 13:12:34 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/17 14:56:34 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define FT_PRINTF_FT_PRINTF_H
 
 # include <zconf.h>
-# include <libft.h>
+# include "libft.h"
 
 # define max(a, b) a > b ? a : b
 # define min(a, b) a < b ? a : b
@@ -26,6 +26,7 @@ typedef struct		s_format_sp
 	int 			accur;
 	unsigned short 	size;
 	char			type;
+	char 			sign;
 }					t_format_sp;
 
 typedef struct		s_type
@@ -56,6 +57,8 @@ char 		*ft_strfill(char c, int length);
 int			ft_c(t_format_sp spec, va_list ap);
 int			ft_s(t_format_sp spec, va_list ap);
 int			ft_d(t_format_sp spec, va_list ap);
+char		*ft_itoa_long(long long int n);
+char 		*handler_flags(char *str, t_format_sp spec);
 
 #endif //FT_PRINTF_FT_PRINTF_H
 

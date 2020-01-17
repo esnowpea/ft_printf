@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:16:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/14 16:24:10 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/17 16:49:58 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_format_sp parsing3(const char **format, t_format_sp spec)
 	while (**(format) != 'c' && **(format) != 's' && **(format) != 'p' && \
 	**(format) != 'd' && **(format) != 'o' && **(format) != 'u' && \
 	**(format) != 'x' && **(format) != 'X' && **(format) != 'f' && \
-	**(format)!= 'e' &&	**(format) != 'g')
+	**(format)!= 'e' &&	**(format) != 'g' && **(format) != '%' && \
+	**(format) != 'i')
 		(*format)++;
 	spec.type = **(format);
 	return (spec);
@@ -50,10 +51,10 @@ t_format_sp parsing2(const char **format, va_list ap, t_format_sp spec)
 	if (**(format) == '.')
 	{
 		(*format)++;
-		if (**(format) <= '9' && **(format) >= '0')
-			spec.accur = ft_atoi(*format);
-		else if (**(format) == '*')
+		if (**(format) == '*')
 			spec.accur = va_arg(ap, int);
+		else
+			spec.accur = ft_atoi(*format);
 	}
 	while ((**(format) <= '9' && **(format) >= '0') || **(format) == '*')
 		(*format)++;
@@ -67,7 +68,8 @@ t_format_sp parsing(const char **format, va_list ap)
 	t_format_sp spec;
 	spec.flags = 0;
 	spec.size = 0;
-	spec.width = -1;
+	spec.width = 0;
+	spec.sign = 0;
 	spec.accur = -1;
 	while (**(format) == '-' || *(*(format)) == '+' || *(*(format)) == ' ' || \
 	*(*(format)) == '#' || *(*(format)) == '0')
