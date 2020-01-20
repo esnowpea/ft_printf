@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+/*  define size   */
+
 t_format_sp parsing3(const char **format, t_format_sp spec)
 {
 	if (**(format) == 'l' && *(*(format) + 1) != 'l')

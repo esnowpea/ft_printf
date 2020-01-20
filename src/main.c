@@ -12,7 +12,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-
 unsigned int x22(unsigned int k)
 {
 	unsigned int out;
@@ -40,8 +39,15 @@ unsigned int x22(unsigned int k)
 
 int main()
 {
-	char str[] = "Hello World! %% %-10.6s\n";
-	char arg[] = "asd123tyu0";
-	ft_printf(str, arg);
-	printf(str, arg);
+	int i;
+	char str[8] = "%#X\n";
+	//char arg[] = "a";
+	i = ft_printf(str, 123456);
+	ft_putnbr(i);
+	write(1,"\n",1);
+
+	i = printf(str, 123456);
+	ft_putnbr(i);
+
+
 }
