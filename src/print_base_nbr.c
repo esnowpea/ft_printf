@@ -12,21 +12,24 @@
 
 #include "ft_printf.h"
 
-static int print(unsigned int a, int base, char alph[15])
+static int print(unsigned int a, int base, char alph[15], t_format_sp spec)
 {
 	int 	j;
-	int 	t;
-	char 	str[31];
+	int 	i;
+	char 	tmp[34];
+	char 	*str;
 
 	j = 0;
 	while(a / base > 0)
 	{
-		str[j] = alph[a % base];
+		tmp[j] = alph[a % base];
 		a = a / base;
 		j++;
 	}
-	str[j] = alph[a % base];
-	t = j;
+	tmp[j] = alph[a % base];
+	str = ft_strnew(34);
+	i = 0;
+	if (spec. == 8 && (spec.flags && 16))
 	while (j >= 0)
 	{
 		write(1, &str[j],1);
@@ -35,25 +38,22 @@ static int print(unsigned int a, int base, char alph[15])
 	return (t);
 }
 
-int	print_base_nbr(unsigned int a, int base, int q)
+char				*print_base_nbr(unsigned int a, int q, t_format_sp spec)
 {
 	char			alph[] = "0123456789abcdef";
 	char			alph2[] = "0123456789ABCDEF";
-	unsigned int	i;
 
-	if (base == 16)
+	if (spec.base == 16 && (spec.flags && 16))
 	{
 		write(1, "0x", 2);
-		i = 2;
 	}
-	else if (base == 8)
+	else if (base == 8 && (spec.flags && 16))
 	{
 		write(1, "0",1);
-		i = 1;
 	}
 	if (q == 0)
-		i += print(a, base,alph);
+		print(a, base,alph);
 	else if (q == 1)
-		i += print(a, base,alph2);
-	return (i);
+		print(a, base,alph2);
+	return ();
 }

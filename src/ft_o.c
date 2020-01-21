@@ -20,6 +20,6 @@ int		ft_o(t_format_sp spec, va_list ap)
 
 	(void)spec;
 	p = va_arg(ap, unsigned int);
-	count = print_base_nbr(p, 8, 0);
+	count = print_base_nbr(p, 8, 0, spec);
 	return (count);
 }
