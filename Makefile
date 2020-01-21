@@ -22,10 +22,13 @@ LDHEAD = ./libft/inc/
 
 LDLIBS = -lft
 
-SRC_NAME =  ft_printf.c \
+SRC_NAME =  main.c \
+            ft_printf.c \
             parsing.c \
             ft_c.c \
             ft_s.c \
+            ft_d.c \
+            ft_p.c \
             ft_d.c \
             ft_itoa_long.c \
             handler_flags.c
@@ -41,6 +44,10 @@ HEAD = ./inc/
 .PHONY: all clean fclean re
 
 all: create_obj $(NAME)
+
+
+create_obj:
+	@mkdir -p $(OBJ)
 
 $(NAME): $(addprefix $(OBJ), $(OBJ_NAME))
 	@make -C ./libft
