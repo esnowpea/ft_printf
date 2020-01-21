@@ -19,12 +19,17 @@
 int		ft_p(t_format_sp spec, va_list ap)
 {
 	void			*p;
-	int 			count;
+	int 			len;
 	unsigned int	q;
+	char 			*s;
 
 	(void)spec;
 	p = va_arg(ap, void *);
 	q = (unsigned int)p;
-	count = print_base_nbr(q, 16, 0);
-	return (count);
+	s = print_base_nbr(q, 0, spec);
+	s = handler_flags(s, spec);
+	len = (int)ft_strlen(s);
+	write(1, s, len);
+	free(s);
+	return (len);
 }

@@ -40,7 +40,7 @@ unsigned int x22(unsigned int k)
 int main()
 {
 	int i;
-	char str[8] = "%#X\n";
+	char str[8] = "%p\n";
 	//char arg[] = "a";
 	i = ft_printf(str, 123456);
 	ft_putnbr(i);

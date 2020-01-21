@@ -64,8 +64,13 @@ char 		*ft_strfill(char c, int length);
 int			ft_c(t_format_sp spec, va_list ap);
 int			ft_s(t_format_sp spec, va_list ap);
 int			ft_d(t_format_sp spec, va_list ap);
+int			ft_p(t_format_sp spec, va_list ap);
+int			ft_o(t_format_sp spec, va_list ap);
+int			ft_x(t_format_sp spec, va_list ap);
+int			ft_x2(t_format_sp spec, va_list ap);
 char		*ft_itoa_base_long(long long int n, int base);
 char 		*handler_flags(char *str, t_format_sp spec);
+char		*print_base_nbr(unsigned int a, int q, t_format_sp spec);
 
 #endif //FT_PRINTF_FT_PRINTF_H
 
