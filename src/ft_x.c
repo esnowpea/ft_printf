@@ -19,7 +19,6 @@ int		ft_x(t_format_sp spec, va_list ap)
 	unsigned int	q;
 	char 			*s;
 
-	(void)spec;
 	p = va_arg(ap, unsigned int);
 	len = print_base_nbr(p, 0, spec);
 	s = handler_flags(s, spec);

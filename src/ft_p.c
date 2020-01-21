@@ -23,7 +23,6 @@ int		ft_p(t_format_sp spec, va_list ap)
 	unsigned int	q;
 	char 			*s;
 
-	(void)spec;
 	p = va_arg(ap, void *);
 	q = (unsigned int)p;
 	s = print_base_nbr(q, 0, spec);

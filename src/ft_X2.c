@@ -15,11 +15,15 @@
 int		ft_x2(t_format_sp spec, va_list ap)
 {
 	void			*p;
-	int 			count;
+	int 			len;
 	unsigned int	q;
+	char 			*s;
 
-	(void)spec;
 	p = va_arg(ap, unsigned int);
-	count = print_base_nbr(p, 16, 1);
-	return (count);
+	len = print_base_nbr(p, 1, spec);
+	s = handler_flags(s, spec);
+	len = (int)ft_strlen(s);
+	write(1, s, len);
+	free(s);
+	return (len);
 }
