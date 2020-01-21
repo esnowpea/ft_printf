@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static int						ft_len_n(unsigned long long int n)
+static int						ft_len_n(unsigned long long int n, int base)
 {
 	int i;
 
@@ -9,7 +9,7 @@ static int						ft_len_n(unsigned long long int n)
 		return (1);
 	while (n)
 	{
-		n /= 10;
+		n /= base;
 		i++;
 	}
 	return (i);
@@ -29,7 +29,7 @@ static unsigned long long int	ft_prov(long long int n, int *minus)
 	return (num);
 }
 
-char							*ft_itoa_long(long long int n)
+char							*ft_itoa_base_long(long long int n, int base)
 {
 	char					*str;
 	int						minus;
@@ -39,16 +39,16 @@ char							*ft_itoa_long(long long int n)
 	i = 0;
 	minus = 0;
 	num = ft_prov(n, &minus);
-	if (!(str = (char*)malloc(ft_len_n(num) + minus + 1)))
+	if (!(str = (char*)malloc(ft_len_n(num, base) + minus + 1)))
 		return (0);
-	i = ft_len_n(num) + minus;
+	i = ft_len_n(num, base) + minus;
 	str[i--] = '\0';
 	if (num == 0)
 		str[i--] = '0';
 	while (num)
 	{
-		str[i--] = (char)(num % 10 + 48);
-		num /= 10;
+		str[i--] = (num % base < 10) ? num % base + '0' : num % base + 'A' - 10;
+		num /= base;
 	}
 	if (minus)
 		str[i--] = '-';

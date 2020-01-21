@@ -6,13 +6,23 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:16:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/17 16:49:58 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:58:19 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*  define size   */
+int 		type_to_base(char type)
+{
+	if (type == 'd' || type == 'i' || type == 'u')
+		return (10);
+	else if (type == 'p' || type == 'x' || type == 'X')
+		return (16);
+	else if (type == 'o')
+		return (8);
+	else
+		return (0);
+}
 
 t_format_sp parsing3(const char **format, t_format_sp spec)
 {
@@ -37,6 +47,7 @@ t_format_sp parsing3(const char **format, t_format_sp spec)
 	**(format) != 'i')
 		(*format)++;
 	spec.type = **(format);
+	spec.base = type_to_base(spec.type);
 	return (spec);
 }
 

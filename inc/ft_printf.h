@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/17 14:56:34 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/21 14:45:27 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct		s_format_sp
 	int 			accur;
 	unsigned short 	size;
 	char			type;
+	int 			base;
+	char 			sign;
 }					t_format_sp;
 
 typedef struct		s_type
@@ -33,6 +35,12 @@ typedef struct		s_type
 	char 			type;
 	int				(*func)(t_format_sp spec, va_list ap);
 }					t_type;
+
+typedef struct		s_long_a
+{
+	int				sign;
+	unsigned int	*bits;
+}					t_long_a;
 
 /*
 **	FLAGS:
@@ -56,13 +64,8 @@ char 		*ft_strfill(char c, int length);
 int			ft_c(t_format_sp spec, va_list ap);
 int			ft_s(t_format_sp spec, va_list ap);
 int			ft_d(t_format_sp spec, va_list ap);
-int			ft_p(t_format_sp spec, va_list ap);
-int			ft_o(t_format_sp spec, va_list ap);
-char		*ft_itoa_long(long long int n);
+char		*ft_itoa_base_long(long long int n, int base);
 char 		*handler_flags(char *str, t_format_sp spec);
-int			print_base_nbr(unsigned int a, int base, int q);
-int			ft_x(t_format_sp spec, va_list ap);
-int			ft_x2(t_format_sp spec, va_list ap);
 
 #endif //FT_PRINTF_FT_PRINTF_H
 

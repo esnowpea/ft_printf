@@ -6,24 +6,24 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:37:18 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/17 18:25:15 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:58:19 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char 	*ft_d_size(t_format_sp spec, va_list ap)
+char 	*ft_d_size(t_format_sp spec, va_list ap, int base)
 {
 	if (spec.size & 1)
-		return (ft_itoa_long((long long int)va_arg(ap, long)));
+		return (ft_itoa_base_long((long long)va_arg(ap, long) , base));
 	else if (spec.size & 2)
-		return (ft_itoa_long((long long int)va_arg(ap, long long int)));
+		return (ft_itoa_base_long((long long)va_arg(ap, long long), base));
 	else if (spec.size & 4)
-		return (ft_itoa_long((long long int)((short int)va_arg(ap, int))));
+		return (ft_itoa_base_long((long long)((short)va_arg(ap, int)), base));
 	else if (spec.size & 8)
-		return (ft_itoa_long((long long int)((char)va_arg(ap, int))));
+		return (ft_itoa_base_long((long long)((char)va_arg(ap, int)), base));
 	else
-		return (ft_itoa_long((long long int)va_arg(ap, int)));
+		return (ft_itoa_base_long((long long)va_arg(ap, int), base));
 }
 
 int		ft_d(t_format_sp spec, va_list ap)
@@ -34,7 +34,7 @@ int		ft_d(t_format_sp spec, va_list ap)
 	int 	len_s;
 	int 	sign;
 
-	if (!(str = ft_d_size(spec, ap)))
+	if (!(str = ft_d_size(spec, ap, spec.base)))
 		return (-1);
 	if (*str == '0' && spec.accur == 0)
 	{

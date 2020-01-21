@@ -10,13 +10,6 @@
 **	'0'	- 10000
 */
 
-char 	*start_s(char *s, int len)
-{
-	while (len--)
-		s--;
-	return (s);
-}
-
 char 	*handler_flags(char *str, t_format_sp spec)
 {
 	int 	len_s;
