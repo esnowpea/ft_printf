@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_0.c                                             :+:      :+:    :+:   */
+/*   ft_u.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgriseld <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 15:36:31 by dgriseld          #+#    #+#             */
-/*   Updated: 2020/01/21 15:58:19 by esnowpea         ###   ########.fr       */
+/*   Created: 2020/01/21 21:58:35 by dgriseld          #+#    #+#             */
+/*   Updated: 2020/01/21 21:58:37 by dgriseld         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_o(t_format_sp spec, va_list ap)
+int						ft_u(t_format_sp spec, va_list ap)
 {
-	unsigned long long	p;
 	int 				len;
+	unsigned long long	p;
 	char 				*s;
 
 	if (!(p = ft_d_size_unsig(spec, ap)))

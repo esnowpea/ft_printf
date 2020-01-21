@@ -14,13 +14,13 @@
 
 int		ft_x2(t_format_sp spec, va_list ap)
 {
-	void			*p;
-	int 			len;
-	unsigned int	q;
-	char 			*s;
+	int 				len;
+	unsigned long long	p;
+	char 				*s;
 
-	p = va_arg(ap, unsigned int);
-	len = print_base_nbr(p, 1, spec);
+	if (!(p = ft_d_size_unsig(spec, ap)))
+		return (-1);
+	s = print_base_nbr(p, 1, spec);
 	s = handler_flags(s, spec);
 	len = (int)ft_strlen(s);
 	write(1, s, len);

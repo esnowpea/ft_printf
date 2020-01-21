@@ -25,6 +25,7 @@ int		ft_p(t_format_sp spec, va_list ap)
 
 	p = va_arg(ap, void *);
 	q = (unsigned int)p;
+	spec.flags = 8;
 	s = print_base_nbr(q, 0, spec);
 	s = handler_flags(s, spec);
 	len = (int)ft_strlen(s);
