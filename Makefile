@@ -6,7 +6,7 @@
 #    By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 13:56:52 by esnowpea          #+#    #+#              #
-#    Updated: 2020/01/22 16:54:03 by esnowpea         ###   ########.fr        #
+#    Updated: 2020/01/21 15:58:19 by esnowpea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,13 @@ SRC_NAME =  ft_printf.c \
             ft_p.c \
             ft_d.c \
             ft_itoa_long.c \
-            handler_flags.c
-
+            handler_flags.c \
+            print_base_nbr.c \
+            ft_o.c \
+             ft_x.c \
+             ft_x2.c \
+             ft_u.c \
+             ft_b.c
 OBJ = ./obj/
 
 SRC = ./src/
