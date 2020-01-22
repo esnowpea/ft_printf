@@ -69,10 +69,11 @@ int					ft_o(t_format_sp spec, va_list ap);
 int					ft_u(t_format_sp spec, va_list ap);
 int					ft_x(t_format_sp spec, va_list ap);
 int					ft_x2(t_format_sp spec, va_list ap);
+int					ft_b(t_format_sp spec, va_list ap);
 char				*ft_itoa_base_long(long long int n, int base);
 char 				*handler_flags(char *str, t_format_sp spec);
 char				*print_base_nbr(unsigned long long a, int q, t_format_sp spec);
-unsigned long long	*ft_d_size_unsig(t_format_sp spec, va_list ap);
+unsigned long long	ft_d_size_unsig(t_format_sp spec, va_list ap);
 
 #endif //FT_PRINTF_FT_PRINTF_H
 

@@ -22,7 +22,8 @@ t_type g_type[] = {
 		{'o', &ft_o},
 		{'u', &ft_d},
 		{'x', &ft_x},
-		{'X', &ft_x2}/*,
+		{'X', &ft_x2},
+		{'b', &ft_b},/*,
 		{'f', &ft_f},
 		{'e', &ft_e},
 		{'g', &ft_g}*/

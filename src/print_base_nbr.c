@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static char	*get_str(unsigned int a, char alph[16], t_format_sp spec)
+static char	*get_str(unsigned int a, const char alph[17], t_format_sp spec)
 {
 	int 	j;
 	int 	i;
@@ -47,10 +47,11 @@ static char	*get_str(unsigned int a, char alph[16], t_format_sp spec)
 
 char				*print_base_nbr(unsigned long long a, int q, t_format_sp spec)
 {
-	char			alph[] = "0123456789abcdef";
-	char			alph2[] = "0123456789ABCDEF";
+	const char			alph[] = "0123456789abcdef";
+	const char			alph2[] = "0123456789ABCDEF";
 	char 			*str;
 
+	str = NULL;
 	if (q == 0)
 		str = get_str(a, alph, spec);
 	else if (q == 1)

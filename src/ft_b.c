@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_x.c                                             :+:      :+:    :+:   */
+/*   ft_b.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgriseld <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 15:46:22 by dgriseld          #+#    #+#             */
-/*   Updated: 2020/01/20 15:46:25 by dgriseld         ###   ########.fr       */
+/*   Created: 2020/01/22 15:47:29 by dgriseld          #+#    #+#             */
+/*   Updated: 2020/01/22 15:47:33 by dgriseld         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned long long	ft_d_size_unsig(t_format_sp spec, va_list ap)
+int		ft_b(t_format_sp spec, va_list ap)
 {
-	if (spec.size & 1)
-		return ((unsigned long long)va_arg(ap, unsigned long));
-	else if (spec.size & 2)
-		return ((unsigned long long)va_arg(ap, unsigned long long));
-	else if (spec.size & 4)
-		return ((unsigned long long)((unsigned short)va_arg(ap, unsigned int)));
-	else if (spec.size & 8)
-		return ((unsigned long long)((unsigned char)va_arg(ap, unsigned int)));
-	else
-		return ((unsigned long long)va_arg(ap, unsigned int));
-}
-
-int						ft_x(t_format_sp spec, va_list ap)
-{
-	int 				len;
 	unsigned long long	p;
+	int 				len;
 	char 				*s;
 
 	if (!(p = ft_d_size_unsig(spec, ap)))

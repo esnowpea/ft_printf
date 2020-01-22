@@ -16,6 +16,8 @@ int 		type_to_base(char type)
 {
 	if (type == 'd' || type == 'i' || type == 'u')
 		return (10);
+	else if (type == 'b')
+		return (2);
 	else if (type == 'p' || type == 'x' || type == 'X')
 		return (16);
 	else if (type == 'o')
@@ -44,7 +46,7 @@ t_format_sp parsing3(const char **format, t_format_sp spec)
 	**(format) != 'd' && **(format) != 'o' && **(format) != 'u' && \
 	**(format) != 'x' && **(format) != 'X' && **(format) != 'f' && \
 	**(format)!= 'e' &&	**(format) != 'g' && **(format) != '%' && \
-	**(format) != 'i')
+	**(format) != 'i' && **(format) != 'b')
 		(*format)++;
 	spec.type = **(format);
 	spec.base = type_to_base(spec.type);
