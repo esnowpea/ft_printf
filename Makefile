@@ -6,7 +6,7 @@
 #    By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 13:56:52 by esnowpea          #+#    #+#              #
-#    Updated: 2020/01/21 15:58:19 by esnowpea         ###   ########.fr        #
+#    Updated: 2020/01/22 16:54:03 by esnowpea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ LDHEAD = ./libft/inc/
 
 LDLIBS = -lft
 
-SRC_NAME =  main.c \
-            ft_printf.c \
+SRC_NAME =  ft_printf.c \
             parsing.c \
             ft_c.c \
             ft_s.c \
@@ -44,10 +43,6 @@ HEAD = ./inc/
 .PHONY: all clean fclean re
 
 all: create_obj $(NAME)
-
-
-create_obj:
-	@mkdir -p $(OBJ)
 
 $(NAME): $(addprefix $(OBJ), $(OBJ_NAME))
 	@make -C ./libft
