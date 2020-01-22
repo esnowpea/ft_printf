@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:37:18 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/21 15:58:19 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/22 20:10:54 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char 	*ft_d_size(t_format_sp spec, va_list ap, int base)
 	if (spec.size & 1)
 		return (ft_itoa_base_long((long long)va_arg(ap, long) , base));
 	else if (spec.size & 2)
-		return (ft_itoa_base_long((long long)va_arg(ap, long long), base));
+		return (ft_itoa_base_long(va_arg(ap, long long), base));
 	else if (spec.size & 4)
 		return (ft_itoa_base_long((long long)((short)va_arg(ap, int)), base));
 	else if (spec.size & 8)

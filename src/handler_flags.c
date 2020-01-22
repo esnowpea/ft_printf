@@ -24,7 +24,7 @@ char 	*handler_flags(char *str, t_format_sp spec)
 		ft_memcpy(s, str, len_s);
 	else
 		ft_memcpy(s + len - len_s, str, len_s);
-	if (spec.flags & 16 && spec.accur == -1)
+	if (spec.flags & 16 && spec.accur == -1 && !(spec.flags & 1))
 	{
 		ft_memset(s, '0', len - len_s);
 		if (spec.sign)
@@ -33,5 +33,6 @@ char 	*handler_flags(char *str, t_format_sp spec)
 			*s = spec.sign;
 		}
 	}
+	free(str);
 	return (s);
 }

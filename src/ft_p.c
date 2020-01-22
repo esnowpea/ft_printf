@@ -6,7 +6,7 @@
 /*   By: dgriseld <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:12:49 by dgriseld          #+#    #+#             */
-/*   Updated: 2020/01/14 16:12:54 by dgriseld         ###   ########.fr       */
+/*   Updated: 2020/01/22 20:34:09 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_p(t_format_sp spec, va_list ap)
 
 	p = va_arg(ap, void *);
 	q = (unsigned long)p;
-	spec.flags = 8;
+	spec.flags |= 8;
 	s = print_base_nbr(q, 0, spec);
 	s = handler_flags(s, spec);
 	len = (int)ft_strlen(s);

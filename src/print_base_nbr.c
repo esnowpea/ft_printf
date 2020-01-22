@@ -6,13 +6,13 @@
 /*   By: dgriseld <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:59:42 by dgriseld          #+#    #+#             */
-/*   Updated: 2020/01/20 14:59:48 by dgriseld         ###   ########.fr       */
+/*   Updated: 2020/01/22 20:10:54 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*get_str(unsigned long a, const char alph[17], t_format_sp spec)
+char	*get_str(unsigned long long a, const char alph[17], t_format_sp spec)
 {
 	int 	j;
 	int 	i;
@@ -45,11 +45,11 @@ static char	*get_str(unsigned long a, const char alph[17], t_format_sp spec)
 	return (str);
 }
 
-char				*print_base_nbr(unsigned long long a, int q, t_format_sp spec)
+char	*print_base_nbr(unsigned long long a, int q, t_format_sp spec)
 {
 	const char			alph[] = "0123456789abcdef";
 	const char			alph2[] = "0123456789ABCDEF";
-	char 			*str;
+	char 				*str;
 
 	str = NULL;
 	if (q == 0)
