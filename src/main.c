@@ -40,14 +40,23 @@ unsigned int x22(unsigned int k)
 int main()
 {
 	int i;
-	char str[8] = "%p\n";
-	//char arg[] = "a";
-	i = ft_printf(str, 123456);
-	ft_putnbr(i);
-	write(1,"\n",1);
+	char str[8] = "%d\n";
 
-	i = printf(str, 123456);
-	ft_putnbr(i);
+
+
+
+
+
+
+
+	//char arg[] = "a";
+	i = ft_printf("%-70p%-32p%-32p%-32p%-32p",01111111777777766666666,02,03,04,05);
+	//ft_putnbr(i);
+
+	write(1,"\nORIGIN\n",8);
+	write(1,"\nORIGIN\n",8);
+	i = printf("%-70p%-32p%-32p%-32p%-32p",01111111777777766666666,02,03,04,05);
+//	ft_putnbr(i);
 
 
 }

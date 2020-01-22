@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static char	*get_str(unsigned int a, const char alph[17], t_format_sp spec)
+static char	*get_str(unsigned long a, const char alph[17], t_format_sp spec)
 {
 	int 	j;
 	int 	i;
