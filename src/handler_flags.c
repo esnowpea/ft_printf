@@ -27,10 +27,10 @@ char 	*handler_flags(char *str, t_format_sp spec)
 	if (spec.flags & 16 && spec.accur == -1 && !(spec.flags & 1))
 	{
 		ft_memset(s, '0', len - len_s);
-		if (spec.sign)
+		if (ft_strlen(spec.sign))
 		{
-			*(s + len - len_s) = '0';
-			*s = spec.sign;
+			ft_memcpy(s + len - len_s, "00", ft_strlen(spec.sign));
+			ft_memcpy(s, spec.sign, ft_strlen(spec.sign));
 		}
 	}
 	free(str);

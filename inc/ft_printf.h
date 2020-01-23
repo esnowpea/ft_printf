@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/22 20:10:54 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:07:06 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_format_sp
 	unsigned short 	size;
 	char			type;
 	int 			base;
-	char 			sign;
+	char 			sign[3];
 }					t_format_sp;
 
 typedef struct		s_type
@@ -36,11 +36,16 @@ typedef struct		s_type
 	int				(*func)(t_format_sp spec, va_list ap);
 }					t_type;
 
-typedef struct		s_long_a
+typedef union			s_long_a
 {
-	int				sign;
-	unsigned int	*bits;
-}					t_long_a;
+	long double				db;
+	struct
+	{
+		unsigned long long	mant : 64;
+		unsigned int		exp : 15;
+		unsigned int		sign : 1;
+	}						number;
+}						t_long_a;
 
 /*
 **	FLAGS:
@@ -70,7 +75,9 @@ int					ft_u(t_format_sp spec, va_list ap);
 int					ft_x(t_format_sp spec, va_list ap);
 int					ft_x2(t_format_sp spec, va_list ap);
 int					ft_b(t_format_sp spec, va_list ap);
-char				*ft_itoa_base_long(long long int n, int base);
+int 				ft_f(t_format_sp spec, va_list ap);
+char				*itoa_base_long(long long int n, int base);
+char				*itoa_base_ulong(unsigned long long n, int base);
 char 				*handler_flags(char *str, t_format_sp spec);
 char				*print_base_nbr(unsigned long long a, int q, t_format_sp spec);
 unsigned long long	ft_d_size_unsig(t_format_sp spec, va_list ap);

@@ -29,14 +29,13 @@ static unsigned long long int	ft_prov(long long int n, int *minus)
 	return (num);
 }
 
-char							*ft_itoa_base_long(long long int n, int base)
+char							*itoa_base_long(long long int n, int base)
 {
 	char					*str;
 	int						minus;
 	int						i;
 	unsigned long long int	num;
 
-	i = 0;
 	minus = 0;
 	num = ft_prov(n, &minus);
 	if (!(str = (char*)malloc(ft_len_n(num, base) + minus + 1)))
@@ -51,6 +50,25 @@ char							*ft_itoa_base_long(long long int n, int base)
 		num /= base;
 	}
 	if (minus)
-		str[i--] = '-';
+		str[i] = '-';
+	return (str);
+}
+
+char	*itoa_base_ulong(unsigned long long n, int base)
+{
+	char					*str;
+	int						i;
+
+	if (!(str = (char*)malloc(ft_len_n(n, base) + 1)))
+		return (0);
+	i = ft_len_n(n, base);
+	str[i--] = '\0';
+	if (n == 0)
+		str[i--] = '0';
+	while (n)
+	{
+		str[i--] = (n % base < 10) ? n % base + '0' : n % base + 'A' - 10;
+		n /= base;
+	}
 	return (str);
 }

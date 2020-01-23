@@ -84,7 +84,7 @@ t_format_sp parsing(const char **format, va_list ap)
 	spec.flags = 0;
 	spec.size = 0;
 	spec.width = 0;
-	spec.sign = 0;
+	ft_memcpy(spec.sign, "\0\0\0", 3);
 	spec.accur = -1;
 	while (**(format) == '-' || *(*(format)) == '+' || *(*(format)) == ' ' || \
 	*(*(format)) == '#' || *(*(format)) == '0')
