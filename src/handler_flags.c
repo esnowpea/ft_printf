@@ -10,6 +10,22 @@
 **	'0'	- 10000
 */
 
+void 	up_to_low(char **s)
+{
+	int		i;
+	int		len;
+	char	*str;
+
+	str = *s;
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len)
+	{
+		str[i] = (str[i] >= 'A' && str[i] <= 'Z') ? str[i] + 32 : str[i];
+		i++;
+	}
+}
+
 char 	*handler_flags(char *str, t_format_sp spec)
 {
 	int 	len_s;
@@ -33,6 +49,8 @@ char 	*handler_flags(char *str, t_format_sp spec)
 			ft_memcpy(s, spec.sign, ft_strlen(spec.sign));
 		}
 	}
+	if (spec.type == 'x' || spec.type == 'p')
+		up_to_low(&s);
 	free(str);
 	return (s);
 }

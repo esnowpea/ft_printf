@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:37:18 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/23 17:06:31 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:19:19 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 char 	*ft_d_size(t_format_sp spec, va_list ap, int base)
 {
-	if ((spec.size & 1) && (spec.type == 'd' || spec.type == 'i'))
+	if (spec.type == 'p')
+		return (itoa_base_ulong((unsigned long long)va_arg(ap, void*), base));
+	else if ((spec.size & 1) && (spec.type == 'd' || spec.type == 'i'))
 		return (itoa_base_long((long long)va_arg(ap, long) , base));
 	else if ((spec.size & 2) && (spec.type == 'd' || spec.type == 'i'))
 		return (itoa_base_long(va_arg(ap, long long), base));
@@ -36,45 +38,7 @@ char 	*ft_d_size(t_format_sp spec, va_list ap, int base)
 		return (itoa_base_ulong((unsigned long long)va_arg(ap, unsigned int), \
 				base));
 }
-/*
-int		ft_d1(t_format_sp spec, va_list ap)
-{
-	char 	*str;
-	char 	*s;
-	int 	len;
-	int 	len_s;
-	int 	sign;
 
-	if (!(str = ft_d_size(spec, ap, spec.base)))
-		return (-1);
-	if (*str == '0' && spec.accur == 0)
-	{
-		free(str);
-		if (!(str = ft_strfill(' ', 0)))
-			return (0);
-	}
-	if (*str == '-')
-		spec.sign = '-';
-	else if (spec.flags & 2)
-		spec.sign = '+';
-	else if (spec.flags & 4)
-		spec.sign = ' ';
-	sign = *str == '-' ? 1 : 0;
-	len_s = max((int)ft_strlen(str + sign), spec.accur);
-	len_s += spec.sign != 0 ? 1 : 0;
-	if (!(s = ft_strfill('0', len_s)))
-		return (0);
-	ft_memcpy(s + len_s - (int)ft_strlen(str + sign), str + sign, \
-	(int)ft_strlen(str));
-	*s = spec.sign != 0 ? spec.sign : *s;
-	free(str);
-	s = handler_flags(s, spec);
-	len = (int)ft_strlen(s);
-	write(1, s, len);
-	free(s);
-	return (len);
-}
-*/
 int		ft_d(t_format_sp spec, va_list ap)
 {
 	char 	*str;
@@ -86,20 +50,22 @@ int		ft_d(t_format_sp spec, va_list ap)
 	if (!(str = ft_d_size(spec, ap, spec.base)))
 		return (-1);
 	if (*str == '0' && spec.accur == 0)
-	{
-		free(str);
-		if (!(str = ft_strfill(' ', 0)))
-			return (0);
-	}
+		ft_memset(str, '\0', ft_strlen(str));
+	if (spec.type == 'o' && (spec.accur > (int)ft_strlen(str) || \
+	(spec.accur	== -1 && *str == '0') || !*str || *str == '0'))
+		spec.flags &= ~8;
+	if (spec.type == 'p')
+		spec.flags |= 8;
 	if (*str == '-')
 		ft_memcpy(spec.sign, "-", 1);
 	else if (spec.flags & 2)
 		ft_memcpy(spec.sign, "+", 1);
 	else if (spec.flags & 4)
 		ft_memcpy(spec.sign, " ", 1);
-	else if (spec.flags & 8 && spec.type == 'o' && *str)
+	else if (spec.flags & 8 && spec.type == 'o')
 		ft_memcpy(spec.sign, "0", 1);
-	else if (spec.flags & 8 && (spec.type == 'x' || spec.type == 'X') && *str)
+	else if (spec.flags & 8 && (spec.type == 'x' || spec.type == 'X' \
+	|| spec.type == 'p'))
 		ft_memcpy(spec.sign, "0X", 2);
 	sign = *str == '-' ? 1 : 0;
 	len_s = max((int)ft_strlen(str + sign), spec.accur);

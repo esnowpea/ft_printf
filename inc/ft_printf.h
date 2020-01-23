@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/23 16:07:06 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:36:17 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,10 @@ char 				*ft_strfill(char c, int length);
 int					ft_c(t_format_sp spec, va_list ap);
 int					ft_s(t_format_sp spec, va_list ap);
 int					ft_d(t_format_sp spec, va_list ap);
-int					ft_p(t_format_sp spec, va_list ap);
-int					ft_o(t_format_sp spec, va_list ap);
-int					ft_u(t_format_sp spec, va_list ap);
-int					ft_x(t_format_sp spec, va_list ap);
-int					ft_x2(t_format_sp spec, va_list ap);
-int					ft_b(t_format_sp spec, va_list ap);
 int 				ft_f(t_format_sp spec, va_list ap);
 char				*itoa_base_long(long long int n, int base);
 char				*itoa_base_ulong(unsigned long long n, int base);
 char 				*handler_flags(char *str, t_format_sp spec);
-char				*print_base_nbr(unsigned long long a, int q, t_format_sp spec);
-unsigned long long	ft_d_size_unsig(t_format_sp spec, va_list ap);
 
 #endif //FT_PRINTF_FT_PRINTF_H
 
