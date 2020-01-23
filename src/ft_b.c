@@ -15,8 +15,8 @@
 int		ft_b(t_format_sp spec, va_list ap)
 {
 	unsigned long long	p;
-	int 				len;
-	char 				*s;
+	int					len;
+	char				*s;
 
 	if (!(p = ft_d_size_unsig(spec, ap)))
 		return (-1);

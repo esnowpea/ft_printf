@@ -12,21 +12,12 @@
 
 #include "ft_printf.h"
 
-char	*get_str(unsigned long long a, const char alph[17], t_format_sp spec)
+char		*cmp_str_with_spec(char *tmp, int j, t_format_sp spec, const char alph[17])
 {
-	int 	j;
-	int 	i;
-	char 	tmp[34];
-	char 	*str;
+	int		i;
+	int		max;
+	char	*str;
 
-	j = 0;
-	while(a / spec.base > 0)
-	{
-		tmp[j] = alph[a % spec.base];
-		a = a / spec.base;
-		j++;
-	}
-	tmp[j] = alph[a % spec.base];
 	str = ft_strnew(34);
 	i = -1;
 	if ((spec.base == 8 || spec.base == 16) && (spec.flags & 8))
@@ -34,14 +25,40 @@ char	*get_str(unsigned long long a, const char alph[17], t_format_sp spec)
 		str[++i] = '0';
 		if (spec.base == 16 && alph[15] == 'f')
 			str[++i] = 'x';
-		else if(spec.base == 16 && alph[15] == 'F')
+		else if (spec.base == 16 && alph[15] == 'F')
 			str[++i] = 'X';
 	}
+	max = ft_strlen(tmp);
+	while (spec.accur - max - i - 1 > 0)
+		str[++i] = '0';
 	while (j >= 0)
 	{
 		str[++i] = tmp[j];
 		j--;
 	}
+	free(tmp);
+	return (str);
+}
+
+char		*get_str(unsigned long long a, const char alph[17], t_format_sp spec)
+{
+	int		j;
+	int		i;
+	char	*tmp;
+	char	*str;
+	int		max;
+
+	tmp = ft_strnew(34);
+	j = 0;
+	while (a / spec.base > 0)
+	{
+		tmp[j] = alph[a % spec.base];
+		a = a / spec.base;
+		j++;
+	}
+	tmp[j] = alph[a % spec.base];
+	str = ft_strnew(34);
+	str = ft_strcpy(str, cmp_str_with_spec(tmp, j, spec, alph));
 	return (str);
 }
 
@@ -49,7 +66,7 @@ char	*print_base_nbr(unsigned long long a, int q, t_format_sp spec)
 {
 	const char			alph[] = "0123456789abcdef";
 	const char			alph2[] = "0123456789ABCDEF";
-	char 				*str;
+	char				*str;
 
 	str = NULL;
 	if (q == 0)

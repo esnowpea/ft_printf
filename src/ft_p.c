@@ -12,16 +12,12 @@
 
 #include "ft_printf.h"
 
-/*   p       The void * pointer argument is printed in hexadecimal (as if by `%#x' or `%#lx').  */
-
-
-
 int		ft_p(t_format_sp spec, va_list ap)
 {
 	void			*p;
-	int 			len;
+	int				len;
 	unsigned long	q;
-	char 			*s;
+	char			*s;
 
 	p = va_arg(ap, void *);
 	q = (unsigned long)p;

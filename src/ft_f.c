@@ -15,7 +15,7 @@
 
 static int	ft_len_n(long double n, int base)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	if (n == 0)

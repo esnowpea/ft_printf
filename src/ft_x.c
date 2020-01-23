@@ -12,8 +12,10 @@
 
 #include "ft_printf.h"
 
-unsigned long long	ft_d_size_unsig(t_format_sp spec, va_list ap)
+unsigned long long		ft_d_size_unsig(t_format_sp spec, va_list ap)
 {
+	unsigned int		a;
+
 	if (spec.size & 1)
 		return ((unsigned long long)va_arg(ap, unsigned long));
 	else if (spec.size & 2)
@@ -22,15 +24,17 @@ unsigned long long	ft_d_size_unsig(t_format_sp spec, va_list ap)
 		return ((unsigned long long)((unsigned short)va_arg(ap, unsigned int)));
 	else if (spec.size & 8)
 		return ((unsigned long long)((unsigned char)va_arg(ap, unsigned int)));
+	else if ((a = va_arg(ap, unsigned int)) == 0)
+		return (0);
 	else
-		return ((unsigned long long)va_arg(ap, unsigned int));
+		return ((unsigned long long)a);
 }
 
 int						ft_x(t_format_sp spec, va_list ap)
 {
-	int 				len;
+	int					len;
 	unsigned long long	p;
-	char 				*s;
+	char				*s;
 
 	if (!(p = ft_d_size_unsig(spec, ap)))
 		return (-1);

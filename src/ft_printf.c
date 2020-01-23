@@ -20,7 +20,7 @@ t_type g_type[] = {
 		{'i', &ft_d},
 		{'p', &ft_p},
 		{'o', &ft_o},
-		{'u', &ft_d},
+		{'u', &ft_u},
 		{'x', &ft_x},
 		{'X', &ft_x2},
 		{'b', &ft_b},/*,

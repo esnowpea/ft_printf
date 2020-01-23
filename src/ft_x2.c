@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-int		ft_x2(t_format_sp spec, va_list ap)
+int						ft_x2(t_format_sp spec, va_list ap)
 {
-	int 				len;
+	int					len;
 	unsigned long long	p;
-	char 				*s;
+	char				*s;
 
 	if (!(p = ft_d_size_unsig(spec, ap)))
 		return (-1);

@@ -15,11 +15,10 @@
 int		ft_o(t_format_sp spec, va_list ap)
 {
 	unsigned long long	p;
-	int 				len;
-	char 				*s;
+	int					len;
+	char				*s;
 
-	if (!(p = ft_d_size_unsig(spec, ap)))
-		return (-1);
+	p = ft_d_size_unsig(spec, ap);
 	s = print_base_nbr(p, 0, spec);
 	s = handler_flags(s, spec);
 	len = (int)ft_strlen(s);
