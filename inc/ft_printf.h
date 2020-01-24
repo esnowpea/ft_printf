@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/23 18:36:17 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/24 14:36:44 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef struct		s_type
 	char 			type;
 	int				(*func)(t_format_sp spec, va_list ap);
 }					t_type;
+
+typedef struct		s_str_len
+{
+	char 			*str;
+	int 			len;
+}					t_str_len;
 
 typedef union			s_long_a
 {
@@ -72,7 +78,7 @@ int					ft_d(t_format_sp spec, va_list ap);
 int 				ft_f(t_format_sp spec, va_list ap);
 char				*itoa_base_long(long long int n, int base);
 char				*itoa_base_ulong(unsigned long long n, int base);
-char 				*handler_flags(char *str, t_format_sp spec);
+t_str_len			handler_flags(char *str, t_format_sp spec);
 
 #endif //FT_PRINTF_FT_PRINTF_H
 

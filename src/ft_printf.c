@@ -29,25 +29,25 @@ t_type g_type[] = {
 		{'g', &ft_g}*/
 };
 
-void 	find_function(t_format_sp spec, va_list ap)
+void	find_function(t_format_sp spec, va_list ap)
 {
 	int		i;
 
 	i = 0;
 	while (i < (int)(sizeof(g_type) / sizeof(t_type)))
 	{
-		 if (g_type[i].type == spec.type)
-		 {
-			  g_type[i].func(spec, ap);
-			  return ;
-		 }
-		 i++;
+		if (g_type[i].type == spec.type)
+		{
+			g_type[i].func(spec, ap);
+			return ;
+		}
+		i++;
 	}
 }
 
-char 	*ft_strfill(char c, int length)
+char	*ft_strfill(char c, int length)
 {
-	char 	*str;
+	char	*str;
 	int		i;
 
 	str = (char*)malloc(sizeof(char) * (length + 1));

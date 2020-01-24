@@ -6,13 +6,13 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:16:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/22 20:10:54 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/24 15:20:46 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int 		type_to_base(char type)
+int			type_to_base(char type)
 {
 	if (type == 'd' || type == 'i' || type == 'u')
 		return (10);
@@ -26,7 +26,7 @@ int 		type_to_base(char type)
 		return (0);
 }
 
-t_format_sp parsing3(const char **format, t_format_sp spec)
+t_format_sp	parsing3(const char **format, t_format_sp spec)
 {
 	if (**(format) == 'l' && *(*(format) + 1) != 'l')
 		spec.size |= 1 << 0;
@@ -45,7 +45,7 @@ t_format_sp parsing3(const char **format, t_format_sp spec)
 	while (**(format) != 'c' && **(format) != 's' && **(format) != 'p' && \
 	**(format) != 'd' && **(format) != 'o' && **(format) != 'u' && \
 	**(format) != 'x' && **(format) != 'X' && **(format) != 'f' && \
-	**(format)!= 'e' &&	**(format) != 'g' && **(format) != '%' && \
+	**(format) != 'e' && **(format) != 'g' && **(format) != '%' && \
 	**(format) != 'i' && **(format) != 'b')
 		(*format)++;
 	spec.type = **(format);
@@ -53,9 +53,11 @@ t_format_sp parsing3(const char **format, t_format_sp spec)
 	return (spec);
 }
 
-/*  define width and accuracy */
+/*
+** define width and accuracy
+*/
 
-t_format_sp parsing2(const char **format, va_list ap, t_format_sp spec)
+t_format_sp	parsing2(const char **format, va_list ap, t_format_sp spec)
 {
 	if (**(format) <= '9' && **(format) >= '0')
 		spec.width = ft_atoi(*format);
@@ -76,11 +78,14 @@ t_format_sp parsing2(const char **format, va_list ap, t_format_sp spec)
 	return (parsing3(format, spec));
 }
 
-/*  define flags   */
+/*
+** define flags
+*/
 
-t_format_sp parsing(const char **format, va_list ap)
+t_format_sp	parsing(const char **format, va_list ap)
 {
 	t_format_sp spec;
+
 	spec.flags = 0;
 	spec.size = 0;
 	spec.width = 0;
