@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:37:18 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/24 15:16:38 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:49:45 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,17 @@ t_format_sp	ft_flags_d(t_format_sp spec, char *str)
 	return (spec);
 }
 
-int			ft_d(t_format_sp spec, va_list ap)
+t_str_len	ft_d(t_format_sp spec, va_list ap)
 {
 	char		*str;
 	t_str_len	s;
 	int			len_s;
 	int			sign;
 
+	s.str = 0;
+	s.len = 0;
 	if (!(str = ft_d_size(spec, ap, spec.base)))
-		return (-1);
+		return (s);
 	if (*str == '0' && spec.accur == 0)
 		ft_memset(str, '\0', ft_strlen(str));
 	spec = ft_flags_d(spec, str);
@@ -76,13 +78,10 @@ int			ft_d(t_format_sp spec, va_list ap)
 	len_s = max((int)ft_strlen(str + sign), spec.accur);
 	len_s += ft_strlen(spec.sign);
 	if (!(s.str = ft_strfill('0', len_s)))
-		return (0);
+		return (s);
 	ft_memcpy(s.str + len_s - (int)ft_strlen(str + sign), str + sign, \
 	(int)ft_strlen(str + sign));
 	ft_memcpy(s.str, spec.sign, ft_strlen(spec.sign));
 	free(str);
-	s = handler_flags(s.str, spec);
-	write(1, s.str, s.len);
-	free(s.str);
-	return (s.len);
+	return (handler_flags(s.str, spec));
 }

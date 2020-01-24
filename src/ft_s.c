@@ -6,13 +6,13 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:05:34 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/24 15:18:13 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/24 15:18:38 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_s(t_format_sp spec, va_list ap)
+t_str_len	ft_s(t_format_sp spec, va_list ap)
 {
 	t_str_len	s;
 	char		*str;
@@ -24,10 +24,7 @@ int		ft_s(t_format_sp spec, va_list ap)
 	else
 		s.len = (int)ft_strlen(str);
 	if (!(s.str = ft_strnew(s.len)))
-		return (-1);
+		return (s);
 	ft_memcpy(s.str, str, s.len);
-	s = handler_flags(s.str, spec);
-	write(1, s.str, s.len);
-	free(s.str);
-	return (s.len);
+	return (handler_flags(s.str, spec));
 }

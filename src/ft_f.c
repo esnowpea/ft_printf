@@ -13,13 +13,16 @@
 #include "ft_printf.h"
 #include <limits.h>
 
-int 	ft_f(t_format_sp spec, va_list ap)
+t_str_len	ft_f(t_format_sp spec, va_list ap)
 {
 	t_long_a	nb;
+	t_str_len	s;
 
 	if (spec.size & 16)
 		nb.db = va_arg(ap, long double);
 	else
 		nb.db = (long double)va_arg(ap, double);
-	return (1);
+	s.str = NULL;
+	s.len = 0;
+	return (s);
 }
