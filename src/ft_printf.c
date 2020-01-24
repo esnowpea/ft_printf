@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:45 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/23 18:01:48 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/24 15:23:40 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		ft_printf(const char *format, ...)
 		}
 		else
 			ft_putchar(*format);
-		format++;
+		format += *format ? 1 : 0;
 	}
 	va_end(ap);
 	return (0); //TODO: char count

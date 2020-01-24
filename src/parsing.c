@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:16:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/24 15:20:46 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/24 15:21:34 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_format_sp	parsing3(const char **format, t_format_sp spec)
 	**(format) != 'd' && **(format) != 'o' && **(format) != 'u' && \
 	**(format) != 'x' && **(format) != 'X' && **(format) != 'f' && \
 	**(format) != 'e' && **(format) != 'g' && **(format) != '%' && \
-	**(format) != 'i' && **(format) != 'b')
+	**(format) != 'i' && **(format) != 'b' && **(format) != '\0')
 		(*format)++;
 	spec.type = **(format);
 	spec.base = type_to_base(spec.type);
