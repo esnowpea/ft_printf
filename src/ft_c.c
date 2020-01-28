@@ -16,11 +16,15 @@ t_str_len	ft_c(t_format_sp spec, va_list ap)
 {
 	char		c;
 	char		*str;
+	t_str_len	s;
 
+	s.len = 0;
+	s.str = 0;
 	c = '%';
 	if (spec.type != '%')
 		c = va_arg(ap, int);
-	str = ft_strnew(2);
+	if (!(str = ft_strnew(2)))
+		return (s);
 	*str = c;
 	return (handler_flags(str, spec));
 }

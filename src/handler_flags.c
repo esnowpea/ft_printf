@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 15:24:26 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/28 15:58:29 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/28 15:59:18 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_str_len	handler_flags(char *str, t_format_sp spec)
 	len_s = spec.type != 'c' ? (int)ft_strlen(str) : 1;
 	s.len = max(len_s, spec.width);
 	if (!(s.str = ft_strnew(s.len)))
-		return (s);//todo malloc
+		return (s);
 	ft_memset(s.str, ' ', s.len);
 	if (spec.flags & 1)
 		ft_memcpy(s.str, str, len_s);
