@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/24 16:46:41 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/01/28 15:58:29 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 # define max(a, b) a > b ? a : b
 # define min(a, b) a < b ? a : b
 # define FD 1
+# define SPEC_FUN {{'c', &ft_c}, \
+{'%', &ft_c}, \
+{'s', &ft_s}, \
+{'d', &ft_d}, \
+{'i', &ft_d}, \
+{'p', &ft_d}, \
+{'o', &ft_d}, \
+{'u', &ft_d}, \
+{'x', &ft_d}, \
+{'X', &ft_d}, \
+{'b', &ft_d}, \
+{'f', &ft_f}/*, \
+		{'e', &ft_e}, \
+		{'g', &ft_g}*/}
 
 typedef struct		s_format_sp
 {
@@ -72,7 +86,7 @@ typedef union			s_long_a
 
 int					ft_printf(const char *format, ...);
 t_format_sp			parsing(const char **format, va_list ap);
-char 				*ft_strfill(char c, int length);
+char 				*ft_strfill1(char c, int length);
 t_str_len			ft_c(t_format_sp spec, va_list ap);
 t_str_len			ft_s(t_format_sp spec, va_list ap);
 t_str_len			ft_d(t_format_sp spec, va_list ap);

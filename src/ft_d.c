@@ -77,8 +77,9 @@ t_str_len	ft_d(t_format_sp spec, va_list ap)
 	sign = *str == '-' ? 1 : 0;
 	len_s = max((int)ft_strlen(str + sign), spec.accur);
 	len_s += ft_strlen(spec.sign);
-	if (!(s.str = ft_strfill('0', len_s)))
+	if (!(s.str = ft_strnew(len_s)))
 		return (s);
+	ft_memset(s.str, '0', len_s);
 	ft_memcpy(s.str + len_s - (int)ft_strlen(str + sign), str + sign, \
 	(int)ft_strlen(str + sign));
 	ft_memcpy(s.str, spec.sign, ft_strlen(spec.sign));
