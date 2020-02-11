@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/28 16:22:40 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/11 18:53:17 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
  					{'e', &ft_e}, \
 					{'g', &ft_g}*/ \
 					}
+# define MAX_NB 500
+# define MAX_NL 10000000000
 
 typedef struct		s_format_sp
 {
@@ -69,6 +71,12 @@ typedef union			s_long_a
 		unsigned int		sign : 1;
 	}						number;
 }						t_long_a;
+
+typedef struct		s_double
+{
+	unsigned long long int	mod_array[MAX_NB];
+	unsigned long long int	div_array[MAX_NB];
+}					t_double;
 
 /*
 **	FLAGS:
