@@ -6,14 +6,12 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:44:14 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 17:08:54 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/12 18:23:17 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include "ft_printf.h"
-
-t_double mant_double(int exp, unsigned long long mant);
 
 t_str_len	ft_f(t_format_sp spec, va_list ap)
 {
@@ -32,10 +30,10 @@ t_str_len	ft_f(t_format_sp spec, va_list ap)
 		*spec.sign = ' ';
 	if (nb.db >= 0 && (spec.flags & 2))
 		*spec.sign = '+';
-	s.str = itoa_double(mant_double(nb.number.exp - 16383, nb.number.mant),
-			spec.accur, spec.sign);
+	s.str = itoa_double(mant_double(nb.number.sign, nb.number.exp - 16383,\
+			nb.number.mant), spec.accur, spec.sign);
 	if (spec.accur == 0 && !(spec.flags & 8))
-		s.str[--s.len] = '\0';
+		s.str[ft_strlen(s.str) - 1] = '\0';
 	return (handler_flags(s.str, spec));
 }
 
@@ -174,7 +172,7 @@ t_double power_two(int n)
 	return (a);
 }
 
-t_double mant_double(int exp, unsigned long long mant)
+t_double mant_double(int sign, int exp, unsigned long long mant)
 {
 	int i;
 	t_double a;
@@ -194,6 +192,11 @@ t_double mant_double(int exp, unsigned long long mant)
 			a = sum_double(a, power_two(exp + i - 63));
 		i--;
 	}
+	a.nan = '\0';
+	if (exp == 16384 && ft_strchr(s, '1') == &s[63])
+		a.nan = sign == 1 ? '-' : '+';
+	if (exp == 16384 && ft_strchr(s, '1') != &s[63])
+		a.nan = 'n';
 	return (a);
 }
 

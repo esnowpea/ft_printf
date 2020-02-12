@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 17:06:38 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/12 17:08:54 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct		s_double
 {
 	unsigned long long int	mod_array[MAX_NB];
 	unsigned long long int	div_array[MAX_NB];
-	char 					nan[4];
+	char 					nan;
 }					t_double;
 
 /*
@@ -107,6 +107,7 @@ t_str_len			handler_flags(char *str, t_format_sp spec);
 char				*itoa_double(t_double a, int accur, char* sign);
 t_double			sum_double(t_double a, t_double b);
 t_double			shift_double_right(t_double a);
+t_double			mant_double(int sign, int exp, unsigned long long mant);
 t_double			first_double(void);
 
 #endif //FT_PRINTF_FT_PRINTF_H

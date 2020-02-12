@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 18:00:04 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 17:18:52 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/12 18:27:21 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -23,15 +23,9 @@
 #define LDBL_PZERO 0x00000000000000000000L
 #define LDBL_NZERO 0x80000000000000000000L
 
-void		out_double_fd(t_double a, int fd);
-t_double	sum_double(t_double a, t_double b);
-t_double	power_two(int n);
-
 int main()
 {
-	t_double b;
-
-	ft_printf("%f\n", DBL_INF);
-	printf("%f\n", DBL_INF);
+	ft_printf("this %.0Lf float\n", LDBL_INF);
+	printf("this %.0Lf float\n", LDBL_INF);
 	return (0);
 }

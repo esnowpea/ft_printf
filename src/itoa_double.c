@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:10:48 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 16:33:51 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/12 18:15:35 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,11 @@ char	*itoa_double(t_double a, int accur, char* sign)
 	a = rounding(a, accur);
 	len = len_mod(a);
 	len += accur + 1 + ft_strlen(sign);
+	if (a.nan == '+')
+		return (ft_strdup("inf"));
+	else if (a.nan == '-')
+		return (ft_strdup("-inf"));
+	else if (a.nan == 'n')
+		return (ft_strdup("nan"));
 	return (double_to_str(a, len, sign));
 }
