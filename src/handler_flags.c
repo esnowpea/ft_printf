@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 15:24:26 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/28 15:59:18 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/12 15:56:32 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_str_len	handler_flags(char *str, t_format_sp spec)
 		ft_memcpy(s.str, str, len_s);
 	else
 		ft_memcpy(s.str + s.len - len_s, str, len_s);
-	if (spec.flags & 16 && spec.accur == -1 && !(spec.flags & 1))
+	if (spec.flags & 16 && (spec.accur == -1 || spec.type == 'f') &&
+	!(spec.flags & 1))
 	{
 		ft_memset(s.str, '0', s.len - len_s);
 		if (ft_strlen(spec.sign))

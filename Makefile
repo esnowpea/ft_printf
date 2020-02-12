@@ -29,6 +29,7 @@ SRC_NAME =  ft_printf.c \
             ft_d.c \
             ft_f.c \
             ft_itoa_long.c \
+            itoa_double.c \
             handler_flags.c
 
 OBJ = ./obj/

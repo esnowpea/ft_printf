@@ -6,28 +6,37 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:44:14 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/11 19:20:51 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/12 17:08:54 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_printf.h>
 #include "ft_printf.h"
 
 t_double mant_double(int exp, unsigned long long mant);
-void 	out_double_fd(t_double a, int fd);
 
 t_str_len	ft_f(t_format_sp spec, va_list ap)
 {
 	t_long_a		nb;
 	t_str_len		s;
 
+	if (spec.accur == -1)
+		spec.accur = 6;
 	if (spec.size & 16)
 		nb.db = va_arg(ap, long double);
 	else
 		nb.db = (long double)va_arg(ap, double);
-	out_double_fd(mant_double(nb.number.exp - 16383, nb.number.mant), 1);
-	s.str = ft_strnew(0);
-	s.len = 0;
-	return (s);
+	if (nb.db < 0)
+		*spec.sign = '-';
+	if (nb.db >= 0 && (spec.flags & 4))
+		*spec.sign = ' ';
+	if (nb.db >= 0 && (spec.flags & 2))
+		*spec.sign = '+';
+	s.str = itoa_double(mant_double(nb.number.exp - 16383, nb.number.mant),
+			spec.accur, spec.sign);
+	if (spec.accur == 0 && !(spec.flags & 8))
+		s.str[--s.len] = '\0';
+	return (handler_flags(s.str, spec));
 }
 
 t_double zero_double(void)
