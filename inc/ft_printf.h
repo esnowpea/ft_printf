@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 14:28:21 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:57:57 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "libft.h"
 
 # define FD			1
-# define SPEC_FUN	12
-# define MAX_NB		10
+# define SPEC_FUN	14
+# define MAX_NB		50
 # define MAX_NL		10000000000
 
 typedef struct				s_format_sp
@@ -85,13 +85,16 @@ t_str_len					ft_c(t_format_sp spec, va_list ap);
 t_str_len					ft_s(t_format_sp spec, va_list ap);
 t_str_len					ft_d(t_format_sp spec, va_list ap);
 t_str_len					ft_f(t_format_sp spec, va_list ap);
+t_str_len					ft_e(t_format_sp spec, va_list ap);
 char						*itoa_base_long(long long int n, int base);
 char						*itoa_base_ulong(unsigned long long n, int base);
 t_str_len					handler_flags(char *str, t_format_sp spec);
 char						*itoa_double(t_double a, int accur, char *sign);
+char						*double_to_str(t_double a, int len, char *sign);
 t_double					sum_double(t_double a, t_double b);
 t_double					mult_double(t_double a, unsigned int b);
 t_double					shift_double_right(t_double a);
+t_double					shift_double_left(t_double a);
 t_double					mant_double(int sign, int exp, \
 							unsigned long long mant);
 t_double					first_double(void);
@@ -99,5 +102,6 @@ t_double					zero_double(void);
 t_double					rounding(t_double a, int accur);
 int							min(int a, int b);
 int							max(int a, int b);
+int							nl(unsigned long long int j);
 
 #endif

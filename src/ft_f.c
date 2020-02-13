@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:44:14 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 12:41:43 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 15:45:19 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,32 @@ t_double	shift_double_right(t_double a)
 	{
 		a.mod_array[i + 1] += a.mod_array[i] % 10 * MAX_NL / 10;
 		a.mod_array[i--] /= 10;
+	}
+	return (a);
+}
+
+t_double	shift_double_left(t_double a)
+{
+	int i;
+
+	i = 0;
+	a.mod_array[i] /= (MAX_NL / 10);
+	i++;
+	while (i < MAX_NB)
+	{
+		a.mod_array[i - 1] += a.mod_array[i] / (MAX_NL / 10);
+		a.mod_array[i] %= (MAX_NL / 10) ;
+		a.mod_array[i++] *= 10;
+	}
+	i = 0;
+	a.mod_array[MAX_NB - 1] += a.div_array[i] / (MAX_NL / 10);
+	a.div_array[i] %= (MAX_NL / 10);
+	a.div_array[i++] *= 10;
+	while (i < MAX_NB)
+	{
+		a.div_array[i - 1] += a.div_array[i] / (MAX_NL / 10);
+		a.div_array[i] %= (MAX_NL / 10);
+		a.div_array[i++] *= 10;
 	}
 	return (a);
 }

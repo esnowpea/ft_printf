@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:45 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 14:15:17 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 15:35:13 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void		array_t_type(t_type type[])
 	type[9] = fun_to_type('X', &ft_d);
 	type[10] = fun_to_type('b', &ft_d);
 	type[11] = fun_to_type('f', &ft_f);
+	type[12] = fun_to_type('e', &ft_e);
+	type[13] = fun_to_type('E', &ft_e);
 }
 
 t_str_len	find_function(t_format_sp spec, va_list ap)
