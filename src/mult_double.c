@@ -41,9 +41,8 @@ t_double	first_double(void)
 	return (num);
 }
 
-t_double	trunce_nb(int i, char n, char m)
+t_double	trunce_nb(t_double c, int i, char n, char m)
 {
-	t_double	c;
 
 	if (n == 'm' && m == 'm')
 	{
@@ -75,11 +74,11 @@ t_double	sum_double(t_double a, t_double b)
 		c.mod_array[i] += a.mod_array[i] + b.mod_array[i];
 		c.div_array[i] += a.div_array[i] + b.div_array[i];
 		if (i != 0 && c.mod_array[i] > MAX_NL - 1)
-			trunce_nb(i, 'm', 'm');
+			c = trunce_nb(c, i, 'm', 'm');
 		if (i != 0 && c.div_array[i] >= MAX_NL)
-			trunce_nb(i, 'd', 'd');
+			c = trunce_nb(c, i, 'd', 'd');
 		if (i == 0 && c.div_array[i] >= MAX_NL)
-			trunce_nb(i, 'm', 'd');
+			c = trunce_nb(c, i, 'm', 'd');
 		i--;
 	}
 	return (c);
@@ -97,11 +96,11 @@ t_double	mult_double(t_double a, unsigned int b)
 		c.mod_array[i] += a.mod_array[i] * b;
 		c.div_array[i] += a.div_array[i] * b;
 		if (i != 0 && c.mod_array[i] > MAX_NL - 1)
-			trunce_nb(i, 'm', 'm');
+			c = trunce_nb(c, i, 'm', 'm');
 		if (i != 0 && c.div_array[i] >= MAX_NL)
-			trunce_nb(i, 'd', 'd');
+			c = trunce_nb(c, i, 'd', 'd');
 		if (i == 0 && c.div_array[i] >= MAX_NL)
-			trunce_nb(i, 'm', 'd');
+			c = trunce_nb(c, i, 'm', 'd');
 		i--;
 	}
 	return (c);

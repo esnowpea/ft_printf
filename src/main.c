@@ -6,11 +6,12 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 18:00:04 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 18:27:21 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 13:22:14 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 #include <stdio.h>
+#include <fcntl.h>
 #define DBL_INF    0x7FF0000000000000
 #define DBL_NINF   0xFFF0000000000000
 #define DBL_NAN    0x7FF0000000100000
@@ -25,7 +26,7 @@
 
 int main()
 {
-	ft_printf("this %.0Lf float\n", LDBL_INF);
-	printf("this %.0Lf float\n", LDBL_INF);
+	ft_printf("%.100f\n", 0.0894255);
+	printf("%.100f\n", 0.0894255);
 	return (0);
 }

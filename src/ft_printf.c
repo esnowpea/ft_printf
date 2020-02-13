@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:45 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 12:58:11 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 13:02:35 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_str_len	find_function(t_format_sp spec, va_list ap)
 {
 	int			i;
 	t_str_len	s;
-	t_type		type[] = SPEC_FUN;;
+	t_type		type[] = SPEC_FUN;
 
 	i = 0;
 	while (i < (int)(sizeof(type) / sizeof(t_type)))

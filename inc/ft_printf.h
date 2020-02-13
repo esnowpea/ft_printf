@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 12:58:11 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 13:02:35 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
  					{'e', &ft_e}, \
 					{'g', &ft_g}*/ \
                     }
-# define MAX_NB 50
+# define MAX_NB 10
 # define MAX_NL 10000000000
 
 typedef struct		s_format_sp
