@@ -6,20 +6,46 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:45 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 13:02:35 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:15:17 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+t_type		fun_to_type(char c, t_str_len (*func)(t_format_sp, va_list))
+{
+	t_type		type;
+
+	type.type = c;
+	type.func = func;
+	return (type);
+}
+
+void		array_t_type(t_type type[])
+{
+	type[0] = fun_to_type('c', &ft_c);
+	type[1] = fun_to_type('%', &ft_c);
+	type[2] = fun_to_type('s', &ft_s);
+	type[3] = fun_to_type('d', &ft_d);
+	type[4] = fun_to_type('i', &ft_d);
+	type[5] = fun_to_type('p', &ft_d);
+	type[6] = fun_to_type('o', &ft_d);
+	type[7] = fun_to_type('u', &ft_d);
+	type[8] = fun_to_type('x', &ft_d);
+	type[9] = fun_to_type('X', &ft_d);
+	type[10] = fun_to_type('b', &ft_d);
+	type[11] = fun_to_type('f', &ft_f);
+}
+
 t_str_len	find_function(t_format_sp spec, va_list ap)
 {
 	int			i;
 	t_str_len	s;
-	t_type		type[] = SPEC_FUN;
+	t_type		type[SPEC_FUN];
 
+	array_t_type(type);
 	i = 0;
-	while (i < (int)(sizeof(type) / sizeof(t_type)))
+	while (i < SPEC_FUN)
 	{
 		if (type[i].type == spec.type)
 			return (type[i].func(spec, ap));

@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 12:43:25 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 12:43:26 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 13:34:23 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_double	first_double(void)
 
 t_double	trunce_nb(t_double c, int i, char n, char m)
 {
-
 	if (n == 'm' && m == 'm')
 	{
 		c.mod_array[i - 1] += c.mod_array[i] / MAX_NL;

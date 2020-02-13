@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 15:24:26 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 12:54:55 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:23:52 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@
 **	'#'	- 01000
 **	'0'	- 10000
 */
+
+int			max(int a, int b)
+{
+	return (a > b ? a : b);
+}
+
+int			min(int a, int b)
+{
+	return (a < b ? a : b);
+}
 
 void		up_to_low(char **s)
 {
