@@ -6,11 +6,10 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:44:14 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 18:23:17 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 12:41:43 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
 #include "ft_printf.h"
 
 t_str_len	ft_f(t_format_sp spec, va_list ap)
@@ -37,83 +36,7 @@ t_str_len	ft_f(t_format_sp spec, va_list ap)
 	return (handler_flags(s.str, spec));
 }
 
-t_double zero_double(void)
-{
-	int			i;
-	t_double	num;
-
-	i = 0;
-	while (i < MAX_NB)
-	{
-		num.div_array[i] = 0;
-		num.mod_array[i++] = 0;
-	}
-	return (num);
-}
-
-t_double sum_double(t_double a, t_double b)
-{
-	int			i;
-	t_double	c;
-
-	c = zero_double();
-	i = MAX_NB - 1;
-	while (i >= 0)
-	{
-		c.mod_array[i] += a.mod_array[i] + b.mod_array[i];
-		c.div_array[i] += a.div_array[i] + b.div_array[i];
-		if (c.mod_array[i] > MAX_NL - 1)
-		{
-			c.mod_array[i - 1] += c.mod_array[i] / MAX_NL;
-			c.mod_array[i] %= MAX_NL;
-		}
-		if (c.div_array[i] > MAX_NL - 1)
-		{
-			c.div_array[i - 1] += c.div_array[i] / MAX_NL;
-			c.div_array[i] %= MAX_NL;
-		}
-		if (i == 0 && c.div_array[i] > MAX_NL - 1)
-		{
-			c.mod_array[MAX_NB - 1] += c.div_array[i] / MAX_NL;
-			c.div_array[i] %= MAX_NL;
-		}
-		i--;
-	}
-	return(c);
-}
-
-t_double mult_double(t_double a, unsigned int b)
-{
-	int			i;
-	t_double	c;
-
-	c = zero_double();
-	i = MAX_NB - 1;
-	while (i >= 0)
-	{
-		c.mod_array[i] += a.mod_array[i] * b;
-		c.div_array[i] += a.div_array[i] * b;
-		if (i != 0 && c.mod_array[i] > MAX_NL - 1)
-		{
-			c.mod_array[i - 1] += c.mod_array[i] / MAX_NL;
-			c.mod_array[i] %= MAX_NL;
-		}
-		if (i != 0 && c.div_array[i] >= MAX_NL)
-		{
-			c.div_array[i - 1] += c.div_array[i] / MAX_NL;
-			c.div_array[i] %= MAX_NL;
-		}
-		if (i == 0 && c.div_array[i] >= MAX_NL)
-		{
-			c.mod_array[MAX_NB - 1] += c.div_array[i] / MAX_NL;
-			c.div_array[i] %= MAX_NL;
-		}
-		i--;
-	}
-	return (c);
-}
-
-t_double shift_double_right(t_double a)
+t_double	shift_double_right(t_double a)
 {
 	int i;
 
@@ -137,22 +60,7 @@ t_double shift_double_right(t_double a)
 	return (a);
 }
 
-t_double first_double(void)
-{
-	int			i;
-	t_double	num;
-
-	i = 0;
-	while (i < MAX_NB)
-	{
-		num.div_array[i] = 0;
-		num.mod_array[i++] = 0;
-	}
-	num.mod_array[MAX_NB - 1] = 1;
-	return (num);
-}
-
-t_double power_two(int n)
+t_double	power_two(int n)
 {
 	int			i;
 	t_double	a;
@@ -172,13 +80,14 @@ t_double power_two(int n)
 	return (a);
 }
 
-t_double mant_double(int sign, int exp, unsigned long long mant)
+t_double	mant_double(int sign, int exp, unsigned long long mant)
 {
-	int i;
-	t_double a;
-	char s[64];
+	int			i;
+	t_double	a;
+	char		s[65];
 
 	i = 0;
+	s[64] = '\0';
 	while (i < 64)
 	{
 		s[i++] = mant % 2 + '0';
@@ -198,51 +107,4 @@ t_double mant_double(int sign, int exp, unsigned long long mant)
 	if (exp == 16384 && ft_strchr(s, '1') != &s[63])
 		a.nan = 'n';
 	return (a);
-}
-
-void	ft_putnbr1(unsigned long long int num, int fd)
-{
-	if (num < 10)
-		ft_putchar_fd(num + '0', fd);
-	else
-	{
-		ft_putnbr1((unsigned long long int)(num / 10), fd);
-		ft_putchar_fd(num % 10 + '0', fd);
-	}
-}
-
-void 	out_double_fd(t_double a, int fd)
-{
-	int i;
-	unsigned long long int j;
-
-	i = 0;
-	while (i < MAX_NB && a.mod_array[i] == 0)
-		i++;
-	if (i < MAX_NB)
-		ft_putnbr1(a.mod_array[i++], fd);
-	while (i < MAX_NB)
-	{
-		j = MAX_NL / 10;
-		while (j > 0)
-		{
-			ft_putnbr1(a.mod_array[i] / j, fd);
-			a.mod_array[i] %= j;
-			j /= 10;
-		}
-		i++;
-	}
-	ft_putchar_fd('.', fd);
-	i = 0;
-	while (i < MAX_NB)
-	{
-		j = MAX_NL / 10;
-		while (j > 0)
-		{
-			ft_putnbr1(a.div_array[i] / j, fd);
-			a.div_array[i] %= j;
-			j /= 10;
-		}
-		i++;
-	}
 }

@@ -6,17 +6,17 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:10:48 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 18:15:35 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 12:29:10 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int 	len_mod(t_double a)
+int			len_mod(t_double a)
 {
-	int i;
-	unsigned long long int j;
-	int len;
+	int						i;
+	unsigned long long int	j;
+	int						len;
 
 	len = 0;
 	i = 0;
@@ -39,17 +39,12 @@ int 	len_mod(t_double a)
 	return (len);
 }
 
-char	*double_to_str(t_double a, int len, char* sign)
+int			double_mod_str(t_double a, char *sign, char *str, int k)
 {
-	char	*str;
-	int i;
-	unsigned long long int j;
-	int k;
+	int						i;
+	unsigned long long int	j;
 
-	if (!(str = ft_strnew(len)))
-		return (0);
 	i = 0;
-	k = 0;
 	if (ft_strlen(sign))
 		str[k++] = *sign;
 	while (i < MAX_NB && a.mod_array[i] == 0)
@@ -69,6 +64,14 @@ char	*double_to_str(t_double a, int len, char* sign)
 	if (k == (int)ft_strlen(sign))
 		str[k++] = '0';
 	str[k++] = '.';
+	return (k);
+}
+
+int			double_div_str(t_double a, int len, char *str, int k)
+{
+	int						i;
+	unsigned long long int	j;
+
 	i = 0;
 	while (i < MAX_NB && k < len)
 	{
@@ -81,87 +84,24 @@ char	*double_to_str(t_double a, int len, char* sign)
 		}
 		i++;
 	}
+	return (k);
+}
+
+char		*double_to_str(t_double a, int len, char *sign)
+{
+	char	*str;
+	int		k;
+
+	if (!(str = ft_strnew(len)))
+		return (0);
+	k = double_mod_str(a, sign, str, 0);
+	k = double_div_str(a, len, str, k);
 	return (str);
 }
 
-int 	nl(unsigned long long int j)
+char		*itoa_double(t_double a, int accur, char *sign)
 {
-	int i;
-
-	i = 0;
-	while (j > 1)
-	{
-		i++;
-		j /= 10;
-	}
-	return (i);
-}
-
-int 	rod(t_double a, int accur)
-{
-	int i;
-	unsigned long long int j;
-
-	if (accur % nl(MAX_NL) == 0)
-		return ((int)(a.div_array[accur / nl(MAX_NL) - 1] % 10));
-	i = 0;
-	j = a.div_array[accur / nl(MAX_NL)];
-	while (i < nl(MAX_NL) - accur % nl(MAX_NL))
-	{
-		j /= 10;
-		i++;
-	}
-	return ((int)(j % 10));
-}
-
-t_double rounding_plus(t_double a, int accur)
-{
-	int i;
-	t_double b;
-
-	b = first_double();
-	i = 0;
-	while (i < accur)
-	{
-		b = shift_double_right(b);
-		i++;
-	}
-	return (sum_double(a, b));
-}
-
-t_double rounding(t_double a, int accur)
-{
-	int 	i;
-
-	if (rod(a, accur + 1) > 5)
-		return (rounding_plus(a, accur));//todo up
-	else if	(rod(a, accur + 1) < 5)
-		return (a);
-	else
-	{
-		i = accur + 2;
-		while (i % nl(MAX_NL))
-		{
-			if (rod(a, i) != 0)
-				return (rounding_plus(a, accur));
-			i++;
-		}
-		if (rod(a, i + 1) != 0)
-			return (rounding_plus(a, accur));
-		i = accur / nl(MAX_NL) == 0 ? accur / nl(MAX_NL) + 1 : accur / nl(MAX_NL);
-		while (i < MAX_NB)
-		{
-			if (a.div_array[i] != 0)
-				return (rounding_plus(a, accur));
-			i++;
-		}
-	}
-	return (a);
-}
-
-char	*itoa_double(t_double a, int accur, char* sign)
-{
-	int len;
+	int		len;
 
 	a = rounding(a, accur);
 	len = len_mod(a);

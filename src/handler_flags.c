@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 15:24:26 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/12 15:56:32 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/13 12:54:55 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ void		up_to_low(char **s)
 	}
 }
 
+void		hf_help_func(t_str_len s, int len_s, t_format_sp spec)
+{
+	ft_memset(s.str, '0', s.len - len_s);
+	if (ft_strlen(spec.sign))
+	{
+		ft_memcpy(s.str + s.len - len_s, "00", ft_strlen(spec.sign));
+		ft_memcpy(s.str, spec.sign, ft_strlen(spec.sign));
+	}
+}
+
 t_str_len	handler_flags(char *str, t_format_sp spec)
 {
 	int			len_s;
@@ -53,14 +63,7 @@ t_str_len	handler_flags(char *str, t_format_sp spec)
 		ft_memcpy(s.str + s.len - len_s, str, len_s);
 	if (spec.flags & 16 && (spec.accur == -1 || spec.type == 'f') &&
 	!(spec.flags & 1))
-	{
-		ft_memset(s.str, '0', s.len - len_s);
-		if (ft_strlen(spec.sign))
-		{
-			ft_memcpy(s.str + s.len - len_s, "00", ft_strlen(spec.sign));
-			ft_memcpy(s.str, spec.sign, ft_strlen(spec.sign));
-		}
-	}
+		hf_help_func(s, len_s, spec);
 	if (spec.type == 'x' || spec.type == 'p')
 		up_to_low(&s.str);
 	free(str);
