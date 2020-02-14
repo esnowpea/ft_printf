@@ -6,7 +6,7 @@
 #    By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 13:56:52 by esnowpea          #+#    #+#              #
-#    Updated: 2020/01/23 18:37:13 by esnowpea         ###   ########.fr        #
+#    Updated: 2020/02/13 16:23:09 by esnowpea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC_NAME =  ft_printf.c \
             ft_s.c \
             ft_d.c \
             ft_f.c \
+            ft_e.c \
+            ft_g.c \
             ft_itoa_long.c \
             itoa_double.c \
             mult_double.c \

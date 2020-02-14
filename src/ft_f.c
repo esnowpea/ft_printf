@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:44:14 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 15:45:19 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:08:29 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_str_len	ft_f(t_format_sp spec, va_list ap)
 		nb.db = va_arg(ap, long double);
 	else
 		nb.db = (long double)va_arg(ap, double);
-	if (nb.db < 0)
+	if (nb.number.sign == 1)
 		*spec.sign = '-';
-	if (nb.db >= 0 && (spec.flags & 4))
-		*spec.sign = ' ';
-	if (nb.db >= 0 && (spec.flags & 2))
+	else if (nb.number.sign == 0 && (spec.flags & 2))
 		*spec.sign = '+';
+	else if (nb.number.sign == 0 && (spec.flags & 4))
+		*spec.sign = ' ';
 	s.str = itoa_double(mant_double(nb.number.sign, nb.number.exp - 16383,\
 			nb.number.mant), spec.accur, spec.sign);
 	if (spec.accur == 0 && !(spec.flags & 8))
@@ -70,7 +70,7 @@ t_double	shift_double_left(t_double a)
 	while (i < MAX_NB)
 	{
 		a.mod_array[i - 1] += a.mod_array[i] / (MAX_NL / 10);
-		a.mod_array[i] %= (MAX_NL / 10) ;
+		a.mod_array[i] %= (MAX_NL / 10);
 		a.mod_array[i++] *= 10;
 	}
 	i = 0;

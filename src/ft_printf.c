@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:45 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 15:35:13 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:03:18 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		array_t_type(t_type type[])
 	type[11] = fun_to_type('f', &ft_f);
 	type[12] = fun_to_type('e', &ft_e);
 	type[13] = fun_to_type('E', &ft_e);
+	type[14] = fun_to_type('g', &ft_g);
+	type[15] = fun_to_type('G', &ft_g);
 }
 
 t_str_len	find_function(t_format_sp spec, va_list ap)
@@ -75,7 +77,6 @@ int			ft_printf(const char *format, ...)
 		s = find_function(parsing(&format, ap), ap);
 		if (s.str == NULL && s.len == 0)
 			exit(EXIT_FAILURE);
-		format += *format ? 1 : 0;
 		write(FD, s.str, s.len);
 		len_out += s.len;
 		free(s.str);

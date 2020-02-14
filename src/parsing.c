@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:16:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/01/24 16:34:09 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:19:12 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ int			type_to_base(char type)
 		return (8);
 	else
 		return (0);
+}
+
+char		*find_spec(const char *format)
+{
+	if (ft_strchr(format, 'c') || ft_strchr(format, 's')
+	|| ft_strchr(format, 'p') || ft_strchr(format, 'd')
+	|| ft_strchr(format, 'o') || ft_strchr(format, 'u')
+	|| ft_strchr(format, 'x') || ft_strchr(format, 'X')
+	|| ft_strchr(format, 'f') || ft_strchr(format, 'e')
+	|| ft_strchr(format, 'g') || ft_strchr(format, '%')
+	|| ft_strchr(format, 'i') || ft_strchr(format, 'b')
+	|| ft_strchr(format, 'E') || ft_strchr(format, 'G'))
+		return (0);
+	return ("1");
 }
 
 t_format_sp	parsing3(const char **format, t_format_sp spec)
@@ -46,9 +60,11 @@ t_format_sp	parsing3(const char **format, t_format_sp spec)
 	**(format) != 'd' && **(format) != 'o' && **(format) != 'u' && \
 	**(format) != 'x' && **(format) != 'X' && **(format) != 'f' && \
 	**(format) != 'e' && **(format) != 'g' && **(format) != '%' && \
-	**(format) != 'i' && **(format) != 'b' && **(format) != '\0')
+	**(format) != 'i' && **(format) != 'b' && **(format) != '\0' && \
+	**(format) != 'E' && **(format) != 'G')
 		(*format)++;
 	spec.type = **(format);
+	*format += **format ? 1 : 0;
 	spec.base = type_to_base(spec.type);
 	return (spec);
 }
@@ -91,6 +107,8 @@ t_format_sp	parsing(const char **format, va_list ap)
 	spec.width = 0;
 	ft_memcpy(spec.sign, "\0\0\0", 3);
 	spec.accur = -1;
+	if (find_spec(*format))
+		return (spec);
 	while (**(format) == '-' || *(*(format)) == '+' || *(*(format)) == ' ' || \
 	*(*(format)) == '#' || *(*(format)) == '0')
 	{

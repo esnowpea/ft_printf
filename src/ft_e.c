@@ -6,10 +6,11 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 14:56:42 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 17:01:37 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:11:17 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_printf.h>
 #include "ft_printf.h"
 
 int 		kol_nl(unsigned long long a)
@@ -53,7 +54,7 @@ int 		shift_e(t_double *a)
 		if ((*a).div_array[i] != 0)
 		{
 			len = kol_nl((*a).div_array[i]);
-			while (k >  (i - 1) * nl(MAX_NL) + len - 1)
+			while (k >  -i * nl(MAX_NL) - (nl(MAX_NL) - len) - 1)
 			{
 				*a = shift_double_left(*a);
 				k--;
@@ -70,12 +71,12 @@ char 		*add_e(char *str, int k)
 	char	*s;
 	int 	len;
 
-	len = ft_strlen(str) + (k > 0 ? 0 : 1) + 4;
+	len = ft_strlen(str) + (k > 0 ? 0 : 1) + 5;
 	if (!(s = ft_strnew(len)))
 		return (0);
 	ft_memcpy(s, str, ft_strlen(str));
 	free(str);
-	s[ft_strlen(s)] = 'e';
+	s[ft_strlen(s)] = 'E';
 	if (k < 0)
 	{
 		s[ft_strlen(s)] = '-';
@@ -105,6 +106,7 @@ char		*itoa_double_e(t_double a, int accur, char *sign)
 
 	k = shift_e(&a);
 	a = rounding(a, accur);
+	k += shift_e(&a);
 	len = accur + ft_strlen(sign) + 2;
 	if (a.nan == '+')
 		return (ft_strdup("inf"));
@@ -128,15 +130,19 @@ t_str_len	ft_e(t_format_sp spec, va_list ap)
 		nb.db = va_arg(ap, long double);
 	else
 		nb.db = (long double)va_arg(ap, double);
-	if (nb.db < 0)
+	if (nb.number.sign == 1)
 		*spec.sign = '-';
-	if (nb.db >= 0 && (spec.flags & 4))
-		*spec.sign = ' ';
-	if (nb.db >= 0 && (spec.flags & 2))
+	else if (nb.db >= 0 && (spec.flags & 2))
 		*spec.sign = '+';
+	else if (nb.db >= 0 && (spec.flags & 4))
+		*spec.sign = ' ';
 	s.str = itoa_double_e(mant_double(nb.number.sign, nb.number.exp - 16383,\
 			nb.number.mant), spec.accur, spec.sign);
 	if (spec.accur == 0 && !(spec.flags & 8))
-		ft_memcpy(ft_strchr(s.str, '.'),ft_strchr(s.str, '.') + 1, ft_strlen(ft_strchr(s.str, '.') + 1));
+	{
+		ft_memcpy(ft_strchr(s.str, '.'), ft_strchr(s.str, '.') + 1,
+				  ft_strlen(ft_strchr(s.str, '.') + 1));
+		s.str[ft_strlen(s.str) - 1] = '\0';
+	}
 	return (handler_flags(s.str, spec));
 }

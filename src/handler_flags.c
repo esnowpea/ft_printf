@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 15:24:26 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/13 16:37:09 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:00:28 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ t_str_len	handler_flags(char *str, t_format_sp spec)
 	if (spec.flags & 16 && (spec.accur == -1 || spec.type == 'f') &&
 	!(spec.flags & 1))
 		hf_help_func(s, len_s, spec);
-	if (spec.type == 'x' || spec.type == 'p' || spec.type == 'E')
+	if (spec.type == 'x' || spec.type == 'p' || spec.type == 'e'
+	|| spec.type == 'g')
 		up_to_low(&s.str);
 	free(str);
 	return (s);
