@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:19:42 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/17 15:21:37 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:25:19 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int			shift_e_left(t_double *a)
 	int		len;
 
 	i = 0;
+	k = 0;
 	while (i < MAX_NB)
 	{
 		if ((*a).div_array[i] != 0)

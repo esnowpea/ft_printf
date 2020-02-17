@@ -66,7 +66,7 @@ char							*itoa_base_long(long long int n, int base)
 	return (str);
 }
 
-char							*itoa_base_ulong(unsigned long long n, int base)
+char							*itoa_u(unsigned long long n, int base)
 {
 	char					*str;
 	int						i;

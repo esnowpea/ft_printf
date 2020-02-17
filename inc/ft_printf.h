@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/17 15:21:37 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:25:19 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_str_len					ft_f(t_format_sp spec, va_list ap);
 t_str_len					ft_e(t_format_sp spec, va_list ap);
 t_str_len					ft_g(t_format_sp spec, va_list ap);
 char						*itoa_base_long(long long int n, int base);
-char						*itoa_base_ulong(unsigned long long n, int base);
+char						*itoa_u(unsigned long long n, int base);
 t_str_len					handler_flags(char *str, t_format_sp spec);
 char						*itoa_double(t_double a, int accur, char *sign);
 char						*itoa_double_e(t_double a, int accur, char *sign);

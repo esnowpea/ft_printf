@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:37:18 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/17 15:08:13 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:10:54 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		*ft_d_size(t_format_sp spec, va_list ap, int base)
 {
 	if (spec.type == 'p')
-		return (itoa_base_ulong((unsigned long long)va_arg(ap, void*), base));
+		return (itoa_u((unsigned long long)va_arg(ap, void*), base));
 	else if ((spec.size & 1) && (spec.type == 'd' || spec.type == 'i'))
 		return (itoa_base_long((long long)va_arg(ap, long), base));
 	else if ((spec.size & 2) && (spec.type == 'd' || spec.type == 'i'))
@@ -27,16 +27,17 @@ char		*ft_d_size(t_format_sp spec, va_list ap, int base)
 	else if (spec.type == 'd' || spec.type == 'i')
 		return (itoa_base_long((long long)va_arg(ap, int), base));
 	else if (spec.size & 1)
-		return (itoa_base_ulong((unsigned long long)va_arg(ap, unsigned long),\
-				base));
+		return (itoa_u((unsigned long long)va_arg(ap, unsigned long), base));
 	else if (spec.size & 2)
-		return (itoa_base_ulong(va_arg(ap, unsigned long long), base));
-	else if (spec.size & 4 || spec.size & 8)
-		return (itoa_base_ulong((unsigned long long)va_arg(ap, unsigned int),\
-				base));
+		return (itoa_u(va_arg(ap, unsigned long long), base));
+	else if (spec.size & 4)
+		return (itoa_u((unsigned long long)(unsigned short)va_arg(ap, \
+				unsigned int), base));
+	else if (spec.size & 8)
+		return (itoa_u((unsigned long long)(unsigned char)va_arg(ap, \
+				unsigned int), base));
 	else
-		return (itoa_base_ulong((unsigned long long)va_arg(ap, unsigned int),\
-				base));
+		return (itoa_u((unsigned long long)va_arg(ap, unsigned int), base));
 }
 
 t_format_sp	ft_flags_d(t_format_sp spec, char *str)
