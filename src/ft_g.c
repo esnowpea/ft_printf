@@ -6,7 +6,7 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:19:42 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/17 15:25:19 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:30:12 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_str_len	ft_g_help(t_format_sp spec, t_long_a nb)
 	if (spec.accur == 0 && !(spec.flags & 8))
 	{
 		ft_memcpy(ft_strchr(s1.str, '.'), ft_strchr(s1.str, '.') + 1, \
-				  ft_strlen(ft_strchr(s1.str, '.') + 1));
+		ft_strlen(ft_strchr(s1.str, '.') + 1));
 		s1.str[ft_strlen(s1.str) - 1] = '\0';
 	}
 	if (ft_strlen(s1.str) < ft_strlen(s2.str))

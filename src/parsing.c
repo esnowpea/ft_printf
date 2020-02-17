@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:16:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/14 16:19:12 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:20:35 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,10 @@ int			type_to_base(char type)
 
 char		*find_spec(const char *format)
 {
-	if (ft_strchr(format, 'c') || ft_strchr(format, 's')
-	|| ft_strchr(format, 'p') || ft_strchr(format, 'd')
-	|| ft_strchr(format, 'o') || ft_strchr(format, 'u')
-	|| ft_strchr(format, 'x') || ft_strchr(format, 'X')
-	|| ft_strchr(format, 'f') || ft_strchr(format, 'e')
-	|| ft_strchr(format, 'g') || ft_strchr(format, '%')
-	|| ft_strchr(format, 'i') || ft_strchr(format, 'b')
-	|| ft_strchr(format, 'E') || ft_strchr(format, 'G'))
+	if (*format != 'c' && *format != 's' && *format != 'p' && *format != 'd' \
+	&& *format != 'o' && *format != 'u' && *format != 'x' && *format != 'X' \
+	&& *format != 'f' && *format != 'e' && *format != 'g' && *format != '%' \
+	&& *format != 'i' && *format != 'b' && *format != 'E' && *format != 'G')
 		return (0);
 	return ("1");
 }
@@ -56,13 +52,10 @@ t_format_sp	parsing3(const char **format, t_format_sp spec)
 		(*format)++;
 	if (**(format) == 'l' || **(format) == 'h')
 		(*format)++;
-	while (**(format) != 'c' && **(format) != 's' && **(format) != 'p' && \
-	**(format) != 'd' && **(format) != 'o' && **(format) != 'u' && \
-	**(format) != 'x' && **(format) != 'X' && **(format) != 'f' && \
-	**(format) != 'e' && **(format) != 'g' && **(format) != '%' && \
-	**(format) != 'i' && **(format) != 'b' && **(format) != '\0' && \
-	**(format) != 'E' && **(format) != 'G')
+	if (**(format) == 'j')
 		(*format)++;
+	if (!find_spec(*format))
+		return (spec);
 	spec.type = **(format);
 	*format += **format ? 1 : 0;
 	spec.base = type_to_base(spec.type);
@@ -75,10 +68,13 @@ t_format_sp	parsing3(const char **format, t_format_sp spec)
 
 t_format_sp	parsing2(const char **format, va_list ap, t_format_sp spec)
 {
+	if (**(format) == '*')
+	{
+		spec.width = va_arg(ap, int);
+		(*format)++;
+	}
 	if (**(format) <= '9' && **(format) >= '0')
 		spec.width = ft_atoi(*format);
-	else if (**(format) == '*')
-		spec.width = va_arg(ap, int);
 	while ((**(format) <= '9' && **(format) >= '0') || **(format) == '*')
 		(*format)++;
 	if (**(format) == '.')
@@ -107,8 +103,6 @@ t_format_sp	parsing(const char **format, va_list ap)
 	spec.width = 0;
 	ft_memcpy(spec.sign, "\0\0\0", 3);
 	spec.accur = -1;
-	if (find_spec(*format))
-		return (spec);
 	while (**(format) == '-' || *(*(format)) == '+' || *(*(format)) == ' ' || \
 	*(*(format)) == '#' || *(*(format)) == '0')
 	{
