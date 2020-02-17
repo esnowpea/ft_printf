@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 16:37:18 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/17 15:07:15 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:08:13 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ t_format_sp	ft_flags_d(t_format_sp spec, char *str)
 		ft_memcpy(spec.sign, "-", 1);
 	else if ((spec.flags & 2) && (spec.type != 'x' && spec.type != 'X' \
 	&& spec.type != 'p' && spec.type != 'o' && spec.type != 'u' \
-	&& spec.type !='b'))
+	&& spec.type != 'b'))
 		ft_memcpy(spec.sign, "+", 1);
 	else if ((spec.flags & 4) && (spec.type != 'x' && spec.type != 'X' \
 	&& spec.type != 'p' && spec.type != 'o' && spec.type != 'u' \
-	&& spec.type !='b'))
+	&& spec.type != 'b'))
 		ft_memcpy(spec.sign, " ", 1);
 	else if (spec.flags & 8 && spec.type == 'o')
 		ft_memcpy(spec.sign, "0", 1);

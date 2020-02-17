@@ -6,14 +6,14 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 14:56:42 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/14 15:11:17 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:23:24 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include "ft_printf.h"
 
-int 		kol_nl(unsigned long long a)
+int			kol_nl(unsigned long long a)
 {
 	int	i;
 
@@ -26,52 +26,28 @@ int 		kol_nl(unsigned long long a)
 	return (i);
 }
 
-int 		shift_e(t_double *a)
+char		*add_e_nb(char *str, int k)
 {
-	int		k;
-	int 	i;
-	int 	len;
-
-	k = 0;
-	i = 0;
-	while (i < MAX_NB)
+	if (kol_nl(k) < 3)
 	{
-		if ((*a).mod_array[i] != 0)
-		{
-			len = kol_nl((*a).mod_array[i]);
-			while (k < (MAX_NB - 1 - i) * nl(MAX_NL) + len - 1)
-			{
-				*a = shift_double_right(*a);
-				k++;
-			}
-			return (k);
-		}
-		i++;
+		str[ft_strlen(str)] = k / 10 + '0';
+		str[ft_strlen(str)] = k % 10 + '0';
 	}
-	i = 0;
-	while (i < MAX_NB)
+	else
 	{
-		if ((*a).div_array[i] != 0)
-		{
-			len = kol_nl((*a).div_array[i]);
-			while (k >  -i * nl(MAX_NL) - (nl(MAX_NL) - len) - 1)
-			{
-				*a = shift_double_left(*a);
-				k--;
-			}
-			return (k);
-		}
-		i++;
+		str[ft_strlen(str)] = k / 100 + '0';
+		str[ft_strlen(str)] = k / 10 % 10 + '0';
+		str[ft_strlen(str)] = k % 10 + '0';
 	}
-	return (k);
+	return (str);
 }
 
-char 		*add_e(char *str, int k)
+char		*add_e(char *str, int k)
 {
 	char	*s;
-	int 	len;
+	int		len;
 
-	len = ft_strlen(str) + (k > 0 ? 0 : 1) + 5;
+	len = (int)ft_strlen(str) + (k > 0 ? 0 : 1) + 5;
 	if (!(s = ft_strnew(len)))
 		return (0);
 	ft_memcpy(s, str, ft_strlen(str));
@@ -84,17 +60,7 @@ char 		*add_e(char *str, int k)
 	}
 	else
 		s[ft_strlen(s)] = '+';
-	if (kol_nl(k) < 3)
-	{
-		s[ft_strlen(s)] = k / 10 + '0';
-		s[ft_strlen(s)] = k % 10 + '0';
-	}
-	else
-	{
-		s[ft_strlen(s)] = k / 100 + '0';
-		s[ft_strlen(s)] = k / 10 % 10 + '0';
-		s[ft_strlen(s)] = k % 10 + '0';
-	}
+	s = add_e_nb(s, k);
 	return (s);
 }
 
@@ -102,7 +68,7 @@ char		*itoa_double_e(t_double a, int accur, char *sign)
 {
 	int		len;
 	int		k;
-	char 	*str;
+	char	*str;
 
 	k = shift_e(&a);
 	a = rounding(a, accur);
@@ -140,8 +106,8 @@ t_str_len	ft_e(t_format_sp spec, va_list ap)
 			nb.number.mant), spec.accur, spec.sign);
 	if (spec.accur == 0 && !(spec.flags & 8))
 	{
-		ft_memcpy(ft_strchr(s.str, '.'), ft_strchr(s.str, '.') + 1,
-				  ft_strlen(ft_strchr(s.str, '.') + 1));
+		ft_memcpy(ft_strchr(s.str, '.'), ft_strchr(s.str, '.') + 1, \
+				ft_strlen(ft_strchr(s.str, '.') + 1));
 		s.str[ft_strlen(s.str) - 1] = '\0';
 	}
 	return (handler_flags(s.str, spec));

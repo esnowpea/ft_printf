@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:01:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/14 15:22:24 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:21:37 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,7 @@ t_double					rounding(t_double a, int accur);
 int							min(int a, int b);
 int							max(int a, int b);
 int							nl(unsigned long long int j);
+int							kol_nl(unsigned long long a);
+int							shift_e(t_double *a);
 
 #endif

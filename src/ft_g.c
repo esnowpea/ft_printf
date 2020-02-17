@@ -6,11 +6,61 @@
 /*   By: esnowpea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:19:42 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/14 16:38:01 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:21:37 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int			shift_e_left(t_double *a)
+{
+	int		k;
+	int		i;
+	int		len;
+
+	i = 0;
+	while (i < MAX_NB)
+	{
+		if ((*a).div_array[i] != 0)
+		{
+			len = kol_nl((*a).div_array[i]);
+			while (k > -i * nl(MAX_NL) - (nl(MAX_NL) - len) - 1)
+			{
+				*a = shift_double_left(*a);
+				k--;
+			}
+			return (k);
+		}
+		i++;
+	}
+	return (k);
+}
+
+int			shift_e(t_double *a)
+{
+	int		k;
+	int		i;
+	int		len;
+
+	k = 0;
+	i = 0;
+	while (i < MAX_NB)
+	{
+		if ((*a).mod_array[i] != 0)
+		{
+			len = kol_nl((*a).mod_array[i]);
+			while (k < (MAX_NB - 1 - i) * nl(MAX_NL) + len - 1)
+			{
+				*a = shift_double_right(*a);
+				k++;
+			}
+			return (k);
+		}
+		i++;
+	}
+	k = shift_e_left(a);
+	return (k);
+}
 
 t_str_len	ft_g_help(t_format_sp spec, t_long_a nb)
 {
@@ -25,7 +75,7 @@ t_str_len	ft_g_help(t_format_sp spec, t_long_a nb)
 		s2.str[ft_strlen(s2.str) - 1] = '\0';
 	if (spec.accur == 0 && !(spec.flags & 8))
 	{
-		ft_memcpy(ft_strchr(s1.str, '.'), ft_strchr(s1.str, '.') + 1,
+		ft_memcpy(ft_strchr(s1.str, '.'), ft_strchr(s1.str, '.') + 1, \
 				  ft_strlen(ft_strchr(s1.str, '.') + 1));
 		s1.str[ft_strlen(s1.str) - 1] = '\0';
 	}
