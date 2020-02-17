@@ -71,7 +71,7 @@ t_str_len	handler_flags(char *str, t_format_sp spec)
 		ft_memcpy(s.str, str, len_s);
 	else
 		ft_memcpy(s.str + s.len - len_s, str, len_s);
-	if (spec.flags & 16 && (spec.accur == -1 || spec.type == 'f') &&
+	if (spec.flags & 16 && (spec.accur < 0 || spec.type == 'f') &&
 	!(spec.flags & 1))
 		hf_help_func(s, len_s, spec);
 	if (spec.type == 'x' || spec.type == 'p' || spec.type == 'e'

@@ -6,7 +6,7 @@
 /*   By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:16:35 by esnowpea          #+#    #+#             */
-/*   Updated: 2020/02/17 16:20:35 by esnowpea         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:21:53 by esnowpea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ t_format_sp	parsing2(const char **format, va_list ap, t_format_sp spec)
 	if (**(format) == '*')
 	{
 		spec.width = va_arg(ap, int);
+		if (spec.width < 0)
+		{
+			spec.flags |= 1 << 0;
+			spec.width = -spec.width;
+		}
 		(*format)++;
 	}
 	if (**(format) <= '9' && **(format) >= '0')
