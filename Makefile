@@ -6,69 +6,83 @@
 #    By: esnowpea <esnowpea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 13:56:52 by esnowpea          #+#    #+#              #
-#    Updated: 2020/02/13 16:23:09 by esnowpea         ###   ########.fr        #
+#    Updated: 2020/07/27 19:33:13 by esnowpea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 CC = gcc
+FLAGS = -Wall -Werror -Wextra
+LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
 
-CFLAGS = -Wall -Werror -Wextra
+LIBFT = $(LIBFT_DIR)libft.a
+LIBFT_DIR = ./libft/
+LIBFT_HEADERS = $(LIBFT_DIR)inc/
 
-LDFLAGS = -L./libft
+INCLUDES = -I$(HEADERS_DIR) -I$(LIBFT_HEADERS)
 
-LDHEAD = ./libft/inc/
+SRC_DIR = src/
 
-LDLIBS = -lft
+SRC_LIST = ft_printf.c \
+                     parsing.c \
+                     ft_c.c \
+                     ft_s.c \
+                     ft_d.c \
+                     ft_f.c \
+                     ft_e.c \
+                     ft_g.c \
+                     ft_itoa_long.c \
+                     itoa_double.c \
+                     mult_double.c \
+                     rounding.c \
+                     handler_flags.c
 
-SRC_NAME =  ft_printf.c \
-            parsing.c \
-            ft_c.c \
-            ft_s.c \
-            ft_d.c \
-            ft_f.c \
-            ft_e.c \
-            ft_g.c \
-            ft_itoa_long.c \
-            itoa_double.c \
-            mult_double.c \
-            rounding.c \
-            handler_flags.c
+SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
-OBJ = ./obj/
+OBJ_DIR = obj/
+OBJ_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
+OBJ	= $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 
-SRC = ./src/
+HEADERS_LIST = ft_printf.h
+HEADERS_DIR = ./inc/
+HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LIST))
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
+# COLORS
 
-HEAD = ./inc/
+GRN = \033[0;32m
+RED = \033[0;31m
+YEL = \033[1;33m
+END = \033[0m
 
-.PHONY: all clean fclean re
+all: $(NAME)
 
-all: create_obj $(NAME)
-
-$(NAME): $(addprefix $(OBJ), $(OBJ_NAME))
-	@make -C ./libft
-	@ar rc $@ $^
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
+	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo "\033[0;32m$(NAME)'s program created.\033[0m"
+	@echo "\n$(NAME): $(GRN)library created$(END)"
 
-$(OBJ)%.o: $(SRC)%.c
-	@$(CC) $(CFLAGS) -I $(HEAD) -I $(LDHEAD) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
+	@echo "$(GRN).$(END)\c"
 
-create_obj:
-	@mkdir -p $(OBJ)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	@echo "$(NAME): $(GRN)$(OBJ_DIR) created$(END)"
+
+$(LIBFT):
+	@echo "$(NAME): $(GRN)Creating $(LIBFT)...$(END)"
+	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	@rm -rf $(addprefix $(OBJ), $(OBJ_NAME))
-	@rm -rf $(OBJ)
-	@make -C ./libft clean
-	@echo "\033[0;32m$(NAME)'s .o files deleted.\033[0m"
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "$(NAME): $(RED)$(OBJ_DIR) deleted$(END)"
+	@echo "$(NAME): $(RED)*.o files deleted$(END)"
 
 fclean: clean
-	@rm -rf $(NAME)
-	@make -C ./libft fclean
-	@echo "\033[0;32m$(NAME) Project fully cleaned.\033[0m"
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
+	@echo "$(NAME): $(RED)$(NAME) deleted$(END)"
 
 re: fclean all
