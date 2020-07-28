@@ -1,5 +1,5 @@
 # ft_printf
 
-`git clone --recursive` URL
+`git clone --recursive <URL>`
 
 and run `make`
